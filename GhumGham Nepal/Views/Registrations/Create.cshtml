@@ -1,0 +1,70 @@
+﻿@model GhumGham_Nepal.Models.Registration
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Create";
+}
+
+<body class="bg-secondary bg-gradient text-light">
+    <div class="container-md py-5 text-center">
+
+        <div class="row">
+            <div class="col-md-4  mx-auto bg-dark bg-gradient shadow-lg" style="border-radius:1rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                <h1 class="text-center fs-3 fw-bold mb-2 text-uppercase mt-3">Register</h1>
+                <p class="text-white-50 text-capitalize  ">Please enter your details</p>
+                <hr />
+                <form asp-action="Create" class="mx-5 px-3 mb-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control rounded-pill" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control rounded-pill" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone" class="control-label"></label>
+                        <input asp-for="Phone" class="form-control rounded-pill" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control rounded-pill" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input type="password" asp-for="Password" class="form-control rounded-pill" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input type="password" asp-for="ConfirmPassword" class="form-control rounded-pill" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div><br />
+                    <div class="form-group d-flex justify-content-around ">
+                        <input type="submit" value="Submit" class="btn btn-outline-light btn-primary btn-lg px-4" />
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-danger btn-outline-light px-4  btn-lg">Cancel</a>
+                    </div>
+                    <div>
+                        <p class="mb-0 mt-4">
+                            Already have an account? <a asp-controller="Login" asp-action="Login" class="text-white-50 fw-bold">Sign In</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        @section Scripts {
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+        </div>
+    </body>

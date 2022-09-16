@@ -1,0 +1,65 @@
+﻿<div class="container-md">
+
+    @model GhumGham_Nepal.DTO.PlaceDTO
+
+    @{
+        ViewData["Title"] = "Edit";
+    }
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    @{
+        Layout = null;
+    }
+    <h1>Edit</h1>
+
+    <h4>Place</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="PlaceName" class="control-label"></label>
+                    <input asp-for="PlaceName" class="form-control" />
+                    <span asp-validation-for="PlaceName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Introduction" class="control-label"></label>
+                    <input asp-for="Introduction" class="form-control" />
+                    <span asp-validation-for="Introduction" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="7"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label"></label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="ThumbnailUrl" />
+
+                @*<div class="form-group">
+                    <label asp-for="ThumbnailUrl" class="control-label"></label>
+                    <input asp-for="ThumbnailUrl" class="form-control" />
+                    <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                </div>*@
+                
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</div>

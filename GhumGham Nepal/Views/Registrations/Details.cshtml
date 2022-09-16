@@ -1,0 +1,58 @@
+﻿@model GhumGham_Nepal.Models.Registration
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Details";
+}
+<body class="bg-secondary bg-gradient text-light">
+
+
+    <div class="container-md py-5 text-center">
+        <div class="col-md-4  mx-auto bg-dark bg-gradient shadow-lg px-4 py-3" style="border-radius:1rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+
+        <h1>Details</h1>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FullName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+            
+        </dl>
+            <div class="form-group d-flex justify-content-evenly" >
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-light btn-primary btn-lg px-4">Edit</a> 
+                <a asp-action="Index" class="btn btn-danger btn-outline-light px-4  btn-lg">Back</a>
+            </div>
+        </div>
+    </div>
+    
+</body>

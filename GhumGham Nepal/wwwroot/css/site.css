@@ -1,0 +1,268 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all 0.2s linear;
+}
+a{
+    text-decoration:none !important;
+}
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 9rem;
+}
+
+    html::-webkit-scrollbar {
+        width: 1rem;
+    }
+
+    html::-webkit-scrollbar-track {
+        background: #111;
+    }
+
+    html::-webkit-scrollbar-thumb {
+        background: #29d9d5;
+        border-radius: 5rem;
+    }
+
+body {
+    background: #111;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 5rem 9%;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+    .heading span {
+        color: #29d9d5;
+        font-size: 2rem;
+    }
+
+    .heading h1 {
+        font-size: 4rem;
+        color: #fff;
+    }
+
+.btn-costom {
+    margin-top: 1rem !important;
+    display: inline-block !important;
+    padding: 1rem 3rem !important;
+    font-size: 1.7rem !important;
+    color: #29d9d5 !important;
+    border: 0.2rem solid #29d9d5 !important;
+    border-radius: 5rem !important ;
+    cursor: pointer;
+    background: none;
+}
+
+    .btn-costom:hover {
+        background: #29d9d5;
+        color: #111!important;
+    }
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 9%;
+}
+
+    .header .navbar a {
+        font-size: 1.7rem;
+        color: #aaa;
+        display: inline-block;
+        margin: 0 1rem;
+
+    }
+
+        .header .navbar a:hover {
+            color: #29d9d5;
+        }
+
+    .header .btn {
+        margin-top: 0;
+    }
+
+.logo {
+    font-size: 2.5rem;
+    color: #fff;
+    font-weight: bolder;
+}
+
+    .logo i {
+        color: #29d9d5;
+        padding-right: 0.5rem;
+    }
+
+#menu-btn {
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+.home {
+    margin: 0 auto;
+    margin-top: 9rem;
+    width: 90%;
+    border-radius: 1rem;
+    background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(17, 17, 17, 0.7)), url(../Images/HomePage/aaa.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5rem;
+}
+
+    .home .content {
+        text-align: center;
+    }
+
+        .home .content span {
+            font-weight: bolder;
+            color: transparent;
+            -webkit-text-stroke: 0.1rem #fff;
+            font-size: 4vw;
+            display: block;
+        }
+
+        .home .content h3 {
+            font-size: 6vw;
+            color: #fff;
+        }
+
+        .home .content p {
+            max-width: 60rem;
+            margin: 1rem auto;
+            font-size: 1.4rem;
+            color: #aaa;
+            line-height: 2;
+        }
+
+@media screen and (max-width: 1200px) {
+    .inner-container {
+        padding: 80px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .about-section {
+        background-size: 100%;
+        padding: 100px 40px;
+    }
+
+    .inner-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .about-section {
+        padding: 0;
+    }
+
+    .inner-container {
+        padding: 60px;
+    }
+}
+
+
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    .header {
+        padding: 1.5rem 2rem;
+    }
+
+    section {
+        padding: 3rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-btn {
+        display: inline-block;
+    }
+
+    .header .navbar {
+        position: absolute;
+        top: 99%;
+        left: 0;
+        right: 0;
+        background: #222;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+        .header .navbar.active {
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .header .navbar a {
+            margin: 2rem;
+            font-size: 2rem;
+            display: block;
+        }
+
+    .home {
+        margin-top: 10rem;
+    }
+
+        .home .content span {
+            font-size: 8vw;
+        }
+
+        .home .content h3 {
+            font-size: 9vw;
+        }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+    .about .content h3 {
+        font-size: 3.5rem;
+    }
+
+    .banner .content h3 {
+        font-size: 2.7rem;
+    }
+}
+
+@media (max-width: 490px) {
+    .footer .box-container {
+        margin-left: 11px;
+        justify-content: space-evenly;
+        text-align: center;
+        grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
+    }
+}

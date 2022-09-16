@@ -1,0 +1,75 @@
+﻿<div class="container-md pb-5 " style="padding-top:30px">
+
+    @model IEnumerable<GhumGham_Nepal.Models.Registration>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+      
+    @{
+        ViewData["Title"] = "Index";
+    }
+    <h1>Users</h1><br /><br />
+
+    <a data-aos="zoom-in-left" data-aos-delay="1300" asp-controller="Login" asp-action="Logout" class="btn-costom"  style="margin-left:90%;">Logout</a>
+    <br />
+    <p>
+        <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
+    </p>
+    <div class="container-fluid rounded-2 border border-4 border-info  rounded">
+        <table class="table text-white table-dark-70 table-striped-columns my-2 mb-5">
+            <thead class="fs-3 table-info">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="fs-5">
+                @using (Html.BeginForm())
+                {
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Username)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-lg">Edit</a> 
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-lg">Details</a> 
+
+                                <button type="submit" onclick="return confirm('Are you sure to delete @item.FullName?')" asp-controller="Registrations"
+                                asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-lg">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

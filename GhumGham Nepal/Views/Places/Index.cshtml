@@ -1,0 +1,41 @@
+﻿@model IEnumerable<GhumGham_Nepal.DTO.PlaceDTO>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+@*@{
+    Layout = null;
+}*@
+
+@using (Html.BeginForm())
+{
+    <div class="container " style="padding-top:100px;">
+        <h3 class="display-4">Places</h3>
+        <p>
+            <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
+        </p>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4  ">
+                    <div class="card mb-5 shadow-sm pb-4 " style="border-radius:30px 30px 30px 30px ;">
+                        <img class="card-img-top animation-c" style="border-radius:30px 30px 0 0 ;" src="@item.ThumbnailUrl" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="card-title">@item.PlaceName</h3>
+                            <p class="card-text">@item.Introduction</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group  ">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-lg rounded-pill mx-2">Details</a> 
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-lg rounded-pill mx-2">Edit</a> 
+                                    <button type="submit" onclick="return confirm('Are you sure to delete @item.PlaceName?')" asp-controller="Places"
+                                    asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-lg rounded-pill mx-2">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}
