@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<GhumGham_Nepal.DTO.PlaceDTO>
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-@*@{
-    Layout = null;
-}*@
+@{
+    ViewData["Title"] = "Destination";
+}
 
 @using (Html.BeginForm())
 {
-    <div class="container " style="padding-top:100px;">
+    <div class="container" style="padding-top:100px;">
         <h3 class="display-4">Places</h3>
         <p>
             <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
@@ -19,7 +19,11 @@
                     <div class="card mb-5 shadow-sm pb-4 " style="border-radius:30px 30px 30px 30px ;">
                         <img class="card-img-top animation-c" style="border-radius:30px 30px 0 0 ;" src="@item.ThumbnailUrl" alt="Card image cap">
                         <div class="card-body">
-                            <h3 class="card-title">@item.PlaceName</h3>
+
+                            <h3 class="card-title">
+                                @item.PlaceName
+                            </h3>
+                            
                             <p class="card-text">@item.Introduction</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group  ">

@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GhumGham_Nepal.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+@*
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    *@
 </head>
 
 <body class="bg-dark bg-gradient">
@@ -18,7 +23,7 @@
 
         <a data-aos="zoom-in-left" data-aos-delay="150" asp-controller="Home" asp-action="Index" class="logo"> <i class="fas fa-paper-plane"></i>GhumGham Nepal </a>
 
-        <nav class="navbar">
+        <nav class="navbar" style="margin-bottom: 0px;">
             <a data-aos="zoom-in-left" data-aos-delay="300" asp-controller="Home" asp-action="Index">home</a>
             <a data-aos="zoom-in-left" data-aos-delay="450" href="#about">about</a>
             <a data-aos="zoom-in-left" data-aos-delay="600" asp-controller="Places" asp-action="Index">destination</a>
@@ -37,7 +42,7 @@
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted mx-5 rounded-pill">
         <!-- Section: Links  -->
-        <section class="rounded-pill" style="background-color: gray; color:white; font-size:medium;">
+        <section class="rounded-pill" style="background-color: darkslateblue; color:cornsilk; font-size:inherit; padding: 2rem 2%;">
             <div class="container text-center text-md-start mt-5">
                 <!-- Grid row -->
                 <div class="row mt-3">
@@ -107,7 +112,7 @@
         </section>
         <!-- Section: Links  -->
         <!-- Copyright -->
-        <div class="text-center p-4 rounded-pill" style="background-color: rgba(0, 0, 0, 0.05);">
+        <div class="text-center p-4 rounded-pill" style="background-color: rgba(0, 0, 0, 0.05); padding: 0.5rem!important;">
             © 2022 Copyright:
             <a class="text-reset fw-bold" href="https://mdbootstrap.com/">GhumGhamNepal.com</a>
         </div>
@@ -120,6 +125,14 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @*
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    *@
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
