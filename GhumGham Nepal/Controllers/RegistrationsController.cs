@@ -22,40 +22,27 @@ namespace GhumGham_Nepal.Controllers
         // GET: Registrations
         public async Task<IActionResult> Index()
         {
-            var LoginStatus = _context.Logins.Any(x => x.LoginStatus == true);
-
-            if(LoginStatus == true)
-            {
-                return _context.Registrations != null ?
-                        View(await _context.Registrations.ToListAsync()) :
-                        Problem("Entity set 'ProjectContext.Registrations'  is null.");
-            }
-            return RedirectToAction("Login", "Login");
-            
+            return _context.Registrations != null ?
+                    View(await _context.Registrations.ToListAsync()) :
+                    Problem("Entity set 'ProjectContext.Registrations'  is null.");
         }
 
         // GET: Registrations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            var LoginStatus = _context.Logins.Any(x => x.LoginStatus == true);
-
-            if (LoginStatus == true)
+            if (id == null || _context.Registrations == null)
             {
-                if (id == null || _context.Registrations == null)
-                {
-                    return NotFound();
-                }
-
-                var registration = await _context.Registrations
-                    .FirstOrDefaultAsync(m => m.Id == id);
-                if (registration == null)
-                {
-                    return NotFound();
-                }
-
-                return View(registration);
+                return NotFound();
             }
-            return RedirectToAction("Login", "Login");
+
+            var registration = await _context.Registrations
+                .FirstOrDefaultAsync(m => m.RegistrationId == id);
+            if (registration == null)
+            {
+                return NotFound();
+            }
+
+            return View(registration);
         }
 
         // GET: Registrations/Create
@@ -67,7 +54,7 @@ namespace GhumGham_Nepal.Controllers
         // POST: Registrations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FullName,Email,Phone,Username,Password,ConfirmPassword")] Registration registration)
+        public async Task<IActionResult> Create([Bind("RegistrationId,FullName,Email,Phone,Username,Password,ConfirmPassword")] Registration registration)
         {
             var EmailExist = _context.Registrations.Any(e => e.Email == registration.Email);
             var UsernameExist = _context.Registrations.Any(e => e.Email == registration.Username);
@@ -95,31 +82,25 @@ namespace GhumGham_Nepal.Controllers
         // GET: Registrations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            var LoginStatus = _context.Logins.Any(x => x.LoginStatus == true);
-
-            if (LoginStatus == true)
+            if (id == null || _context.Registrations == null)
             {
-                if (id == null || _context.Registrations == null)
-                {
-                    return NotFound();
-                }
-
-                var registration = await _context.Registrations.FindAsync(id);
-                if (registration == null)
-                {
-                    return NotFound();
-                }
-                return View(registration);
+                return NotFound();
             }
-            return RedirectToAction("Login", "Login");
+
+            var registration = await _context.Registrations.FindAsync(id);
+            if (registration == null)
+            {
+                return NotFound();
+            }
+            return View(registration);
         }
 
         // POST: Registrations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,Email,Phone,Username,Password,ConfirmPassword")] Registration registration)
+        public async Task<IActionResult> Edit(int id, [Bind("RegistrationId,FullName,Email,Phone,Username,Password,ConfirmPassword")] Registration registration)
         {
-            if (id != registration.Id)
+            if (id != registration.RegistrationId)
             {
                 return NotFound();
             }
@@ -133,7 +114,7 @@ namespace GhumGham_Nepal.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RegistrationExists(registration.Id.Value))
+                    if (!RegistrationExists(registration.RegistrationId))
                     {
                         return NotFound();
                     }
@@ -169,7 +150,7 @@ namespace GhumGham_Nepal.Controllers
 
         private bool RegistrationExists(int id)
         {
-            return (_context.Registrations?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Registrations?.Any(e => e.RegistrationId == id)).GetValueOrDefault();
         }
     }
 }

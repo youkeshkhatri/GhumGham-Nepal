@@ -58,11 +58,11 @@
                                 @Html.DisplayFor(modelItem => item.Password)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-lg">Edit</a> 
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-lg">Details</a> 
+                                <a asp-action="Edit" asp-route-id="@item.RegistrationId" class="btn btn-success btn-lg">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.RegistrationId" class="btn btn-primary btn-lg">Details</a>
 
                                 <button type="submit" onclick="return confirm('Are you sure to delete @item.FullName?')" asp-controller="Registrations"
-                                asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-lg">
+                                asp-action="Delete" asp-route-id="@item.RegistrationId" class="btn btn-danger btn-lg">
                                     Delete
                                 </button>
                             </td>

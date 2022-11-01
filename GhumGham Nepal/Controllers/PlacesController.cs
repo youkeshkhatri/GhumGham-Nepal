@@ -48,7 +48,7 @@ namespace GhumGham_Nepal.Controllers
             }
 
             var place = await _context.Places
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.PlaceId == id);
             if (place == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace GhumGham_Nepal.Controllers
 
         private bool PlaceExists(int id)
         {
-            return (_context.Places?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Places?.Any(e => e.PlaceId == id)).GetValueOrDefault();
         }
         #endregion
 
@@ -162,7 +162,7 @@ namespace GhumGham_Nepal.Controllers
             }
 
             var place = await _context.Places
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.PlaceId == id);
             if (place == null)
             {
                 return NotFound();

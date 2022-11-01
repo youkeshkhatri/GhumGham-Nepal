@@ -9,7 +9,7 @@ namespace GhumGham_Nepal.Factory
         {
             Place entity = new()
             {
-                Id = dto.Id,
+                PlaceId = dto.Id,
                 PlaceName = dto.PlaceName,
                 Introduction = dto.Introduction,
                 Description = dto.Description,
@@ -26,7 +26,7 @@ namespace GhumGham_Nepal.Factory
 
             var dto = entity.Select(x => new PlaceDTO
             {
-                Id = x.Id,
+                Id = x.PlaceId,
                 PlaceName = x.PlaceName,
                 Introduction = x.Introduction,
                 Description = x.Description,
@@ -43,7 +43,7 @@ namespace GhumGham_Nepal.Factory
 
             PlaceDTO dto = new()
             {
-                Id = entity.Id,
+                Id = entity.PlaceId,
                 PlaceName = entity.PlaceName,
                 Introduction = entity.Introduction,
                 Description = entity.Description,
