@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GhumGham_Nepal.Models;
 using GhumGham_Nepal.DTO;
 using GhumGham_Nepal.Factory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GhumGham_Nepal.Controllers
 {
@@ -61,12 +62,14 @@ namespace GhumGham_Nepal.Controllers
         #region Create
 
         // GET: Places/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Places/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PlaceDTO place)
@@ -95,6 +98,7 @@ namespace GhumGham_Nepal.Controllers
 
         #region Edit
 
+        [Authorize]
         // GET: Places/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -113,6 +117,7 @@ namespace GhumGham_Nepal.Controllers
         }
 
         // POST: Places/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, PlaceDTO place)
@@ -153,7 +158,9 @@ namespace GhumGham_Nepal.Controllers
 
         #region Delete
 
+
         // GET: Places/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Places == null)
@@ -172,6 +179,7 @@ namespace GhumGham_Nepal.Controllers
         }
 
         // POST: Places/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

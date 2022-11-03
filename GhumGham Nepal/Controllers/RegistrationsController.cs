@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GhumGham_Nepal.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GhumGham_Nepal.Controllers
 {
+    [Authorize]
     public class RegistrationsController : Controller
     {
         private readonly ProjectContext _context;

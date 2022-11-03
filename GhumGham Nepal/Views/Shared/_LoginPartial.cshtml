@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using GhumGham_Nepal.Areas.Identity.Data
+
+@inject SignInManager<GhumGham_NepalUser> SignInManager
+@inject UserManager<GhumGham_NepalUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @*<li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        </li>*@
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" onclick="return confirm('Are you sure you want to Logout?')" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" data-aos="zoom-in-left" data-aos-delay="1300" id="logout" class="btn-costom">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+       @* <li class="nav-item">
+            <a data-aos="zoom-in-left" data-aos-delay="1300" id="register" class="btn-costom" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>*@
+        <li class="nav-item">
+            <a data-aos="zoom-in-left" data-aos-delay="1300" id="login" class="btn-costom" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

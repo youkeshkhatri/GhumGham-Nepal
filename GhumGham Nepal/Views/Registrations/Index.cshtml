@@ -2,13 +2,14 @@
 
     @model IEnumerable<GhumGham_Nepal.Models.Registration>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-      
+
     @{
         ViewData["Title"] = "Index";
     }
     <h1>Users</h1><br /><br />
 
-    <a data-aos="zoom-in-left" data-aos-delay="1300" asp-controller="Login" asp-action="Logout" class="btn-costom"  style="margin-left:90%;">Logout</a>
+    @*    <a data-aos="zoom-in-left" data-aos-delay="1300" asp-controller="Login" asp-action="Logout" class="btn-costom"  style="margin-left:90%;">Logout</a>
+    *@
     <br />
     <p>
         <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
