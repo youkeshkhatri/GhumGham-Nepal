@@ -33,11 +33,6 @@ namespace GhumGham_Nepal.Controllers
         {
             var data = await _context.Places.ToListAsync();
             return View(data.ToDTO());
-
-
-            //return _context.Places != null ? 
-            //            View(await _context.Places.ToListAsync()) :
-            //            Problem("Entity set 'ProjectContext.Places'  is null.");
         }
 
         // GET: Places/Details/5
@@ -55,7 +50,7 @@ namespace GhumGham_Nepal.Controllers
                 return NotFound();
             }
 
-            return View(place);
+            return View(place.ToDTO());
         }
         #endregion
 

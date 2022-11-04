@@ -32,13 +32,29 @@
             <a data-aos="zoom-in-left" data-aos-delay="1150" asp-controller="Registrations" asp-action="Index">Users</a>
         </nav>
 
-       @* <a data-aos="zoom-in-left" data-aos-delay="1300" id="login" asp-area="Identity" asp-page="/Account/Login" class="btn-costom">Login</a>
+        @* <a data-aos="zoom-in-left" data-aos-delay="1300" id="login" asp-area="Identity" asp-page="/Account/Login" class="btn-costom">Login</a>
         <a data-aos="zoom-in-left" data-aos-delay="1300" asp-controller="Login" asp-action="Login" class="btn-costom">Login</a>*@
 
-        <partial name="_LoginPartial"/>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="https://aide.self.rigohr.com/\images\male.png" style="max-width: 100%; width: 40px; height: 40px; border-radius: 100%;" />
+                Profile
+            </button>
+            <div class="dropdown-menu py-4" aria-labelledby="dropdownMenuButton" style="align-content:center; text-align:center;">
+                <div class="dropdown-item">
+                    <img src="https://aide.self.rigohr.com/\images\male.png" style="margin-left:5px; width: 80px; height: 80px; border-radius: 100%;" />
+                </div>
+                <div class="dropdown-item">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </div>
+
     </header>
     <!-- Navbar -->
     @RenderBody()
+
 
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted mx-5 rounded-pill">
