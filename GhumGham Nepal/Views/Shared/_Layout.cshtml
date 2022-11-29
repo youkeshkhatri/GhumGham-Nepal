@@ -4,14 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]  GhumGham_Nepal</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GhumGham_Nepal.styles.css" asp-append-version="true" />
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    @*
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    *@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 
 <body class="bg-dark bg-gradient">
@@ -21,19 +17,19 @@
 
         <div id="menu-btn" class="fas fa-bars"></div>
 
-        <a data-aos="zoom-in-left" data-aos-delay="150" asp-controller="Home" asp-action="Index" class="logo"> <i class="fas fa-paper-plane"></i>GhumGham Nepal </a>
+        <a data-aos="zoom-in-left" data-aos-delay="150" asp-controller="Home" asp-action="Index" class="logo">GhumGham Nepal </a>
 
         <nav class="navbar" style="margin-bottom: 0px;">
             <a data-aos="zoom-in-left" data-aos-delay="300" asp-controller="Home" asp-action="Index">home</a>
-            <a data-aos="zoom-in-left" data-aos-delay="450" href="#about">about</a>
+            <a data-aos="zoom-in-left" data-aos-delay="450" asp-controller="Home" asp-action="Privacy">about</a>
+            <a data-aos="zoom-in-left" data-aos-delay="600" asp-controller="Home" asp-action="Services">services</a>
             <a data-aos="zoom-in-left" data-aos-delay="600" asp-controller="Places" asp-action="Index">destination</a>
-            <a data-aos="zoom-in-left" data-aos-delay="750" href="#services">services</a>
             <a data-aos="zoom-in-left" data-aos-delay="900" href="#gallery">gallery</a>
-            <a data-aos="zoom-in-left" data-aos-delay="1150" asp-controller="Registrations" asp-action="Index">Users</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a data-aos="zoom-in-left" data-aos-delay="1150" asp-controller="Registrations" asp-action="Index">Users</a>
+            }
         </nav>
-
-        @* <a data-aos="zoom-in-left" data-aos-delay="1300" id="login" asp-area="Identity" asp-page="/Account/Login" class="btn-costom">Login</a>
-        <a data-aos="zoom-in-left" data-aos-delay="1300" asp-controller="Login" asp-action="Login" class="btn-costom">Login</a>*@
 
 
         <div class="dropdown">
@@ -53,9 +49,9 @@
 
     </header>
     <!-- Navbar -->
+    <!-- Body -->
     @RenderBody()
-
-
+    <!-- Body -->
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted mx-5 rounded-pill">
         <!-- Section: Links  -->
@@ -136,20 +132,15 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-
-
-
+    <!-- scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @*
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    *@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <!-- scripts -->
 
 </body>
 </html>

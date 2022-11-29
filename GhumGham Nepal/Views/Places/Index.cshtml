@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<GhumGham_Nepal.DTO.PlaceDTO>
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @{
     ViewData["Title"] = "Destination";
@@ -8,10 +8,31 @@
 @using (Html.BeginForm())
 {
     <div class="container" style="padding-top:100px;">
-        <h3 class="display-4">Places</h3>
-        <p>
-            <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
-        </p>
+
+        <div class="topnav">
+@*            <a style="font-size:xx-large">Places</a>
+*@
+            <h3 class="heading2">
+                <span class="space"></span>
+                <span>p</span>
+                <span>l</span>
+                <span>a</span>
+                <span>c</span>
+                <span>e</span>
+                <span>s</span>
+          
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            </h3>
+
+        </div><br>
+
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>
+                <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
+            </p>
+        }
         <div class="row">
             @foreach (var item in Model)
             {
@@ -20,22 +41,33 @@
                         <img class="card-img-top animation-c" style="border-radius:30px 30px 0 0 ;" src="@item.ThumbnailUrl" alt="Card image cap">
                         <div class="card-body">
 
-                            <h3 class="card-title">
+                            <h2>
+                                <i class="fa fa-map-marker" style="font-size:20px;color:orange;"></i>
                                 @item.PlaceName
-                            </h3>
+                            </h2>
 
-                            <p class="card-text">@item.Introduction</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group  ">
+                            <p class="card-text ml-1">@item.Introduction</p>
 
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-lg rounded-pill mx-2">Details</a>
+                            <div class="stars" style="font-size:17px;color:orange; margin-left:3px;">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            </div>
+
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn-SeeMore rounded-pill mx-2">See More...</a>
+
+                            <div class="btn-group  ">
+
+                                <div class="d-flex justify-content-between align-items-center">
 
                                     @if (User.Identity.IsAuthenticated)
                                     {
-                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-lg rounded-pill mx-2">Edit</a>
-                                        
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-lg rounded-pill mx-2">Edit</a>
+
                                         <button type="submit" onclick="return confirm('Are you sure to delete @item.PlaceName?')" asp-controller="Places"
-                                        asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-lg rounded-pill mx-2">
+                                    asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-lg rounded-pill mx-2">
                                             Delete
                                         </button>
                                     }
@@ -50,3 +82,4 @@
         </div>
     </div>
 }
+
