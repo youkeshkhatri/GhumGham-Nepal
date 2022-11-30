@@ -33,7 +33,12 @@ namespace GhumGham_Nepal.Models
         {
             modelBuilder.Entity<Place>(entity =>
             {
-                entity.Property(e => e.Description).IsUnicode(false);
+                entity.Property(e => e.Description1).IsUnicode(false);
+                entity.Property(e => e.Description2).IsUnicode(false);
+                entity.Property(e => e.Description3).IsUnicode(false);
+                entity.Property(e => e.Hotel1).IsUnicode(false);
+                entity.Property(e => e.Hotel2).IsUnicode(false);
+                entity.Property(e => e.Hotel3).IsUnicode(false);
 
                 entity.Property(e => e.Introduction)
                     .HasMaxLength(500)
