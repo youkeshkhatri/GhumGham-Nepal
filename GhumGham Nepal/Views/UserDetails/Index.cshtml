@@ -1,0 +1,79 @@
+﻿@model IEnumerable<GhumGham_Nepal.Models.AspNetUser>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-md pb-5 " style="padding-top:30px">
+
+    <h1 class="heading2">
+        <br />
+        <span>u</span>
+        <span>s</span>
+        <span>e</span>
+        <span>r</span>
+        <span>s</span>
+    </h1>
+    <p>
+        <a id="register" class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </p>
+
+    <div class="container-fluid rounded-2 border border-4 border-info  rounded">
+        <table class="table text-white table-dark-70 table-striped-columns my-2 mb-5">
+            <thead class="fs-3 table-info">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmailConfirmed)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody class="fs-5">
+                @using (Html.BeginForm())
+                {
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+
+                            <td style="text-align:inherit;">
+                                @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                            </td>
+
+                            <td>
+                               @* <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-lg">Edit</a>
+                                <button type="submit" onclick="return confirm('Are you sure to delete @item.UserName?')" asp-controller="Registrations"
+                                asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-lg">
+                                    Delete
+                                </button>*@
+
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-lg">Details</a>
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

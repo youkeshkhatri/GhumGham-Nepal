@@ -10,6 +10,18 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
 <div class="container py-5 " style="width:75%;">
+@*
+    @if (ViewBag.IsSuccess)
+    {
+        <div class="alert alert-success alert-dismissible fade show col-md-6" role="alert">
+            <strong>Successful</strong> Your message was sent successfully.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+*@
+
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card bg-dark text-white" style="border-radius: 1rem;">
@@ -44,7 +56,7 @@
                                     </div>
                                     <br />
                                     <div class="form-group d-flex justify-content-evenly ">
-                                        <button id="login-submit" type="submit" class="btn btn-outline-light btn-primary btn-lg px-4">LOGIN</button>
+                                        <button asp-route-returnUrl="@Model.ReturnUrl" id="login-submit" type="submit" class="btn btn-outline-light btn-primary btn-lg px-4">LOGIN</button>
                                         <a asp-action="Index" asp-controller="Home" class="btn btn-danger btn-outline-light px-4  btn-lg">Cancel</a>
                                     </div><br />
                                     <div>
@@ -63,40 +75,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-
-            @*<h3>Use another service to log in.</h3
-            <hr />>*@
-
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            @*There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                article
-                                about setting up this ASP.NET application to support logging in via external services
-                            </a>.*@
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
     </div>
 </div>
 

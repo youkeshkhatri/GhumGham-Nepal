@@ -5,11 +5,6 @@ namespace GhumGham_Nepal.Models
 {
     public partial class Registration
     {
-        public Registration()
-        {
-            Reviews = new HashSet<Review>();
-        }
-
         public int RegistrationId { get; set; }
         public string? FullName { get; set; }
         public string? Email { get; set; }
@@ -17,7 +12,5 @@ namespace GhumGham_Nepal.Models
         public string? Username { get; set; }
         public string? Password { get; set; }
         public string? ConfirmPassword { get; set; }
-
-        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

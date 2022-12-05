@@ -13,7 +13,7 @@
         
         <li class="nav-item">
             <hr />
-            <form id="logoutForm" class="form-inline" onclick="return confirm('Are you sure you want to Logout?')" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <form id="logoutForm" class="form-inline" onclick="return confirm('Are you sure you want to Logout?')" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Context.Request.Path">
                 <button type="submit" data-aos="zoom-in-left" data-aos-delay="1300" id="logout" class="btn btn-danger">Logout</button>
             </form>
         </li>
@@ -23,8 +23,8 @@
        @* <li class="nav-item">
             <a data-aos="zoom-in-left" data-aos-delay="1300" id="register" class="btn-costom" asp-area="Identity" asp-page="/Account/Register">Register</a>
         </li>*@
-        <li class="nav-item" style="margin-left:18px;">
-            <a data-aos="zoom-in-left" data-aos-delay="1300" id="login" class="btn-costom" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <li class="nav-item" style="margin-left:9px;">
+            <a data-aos="zoom-in-left" data-aos-delay="1300" id="login" class="btn-costom" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Context.Request.Path">Login</a>
         </li>
     }
 </ul>

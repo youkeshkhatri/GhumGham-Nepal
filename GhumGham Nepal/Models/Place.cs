@@ -16,11 +16,5 @@ namespace GhumGham_Nepal.Models
         public string? Hotel2 { get; set; }
         public string? Hotel3 { get; set; }
         public string? ThumbnailUrl { get; set; }
-
-        public virtual ICollection<Review> Reviews { get; set; }
-        public Place()
-        {
-            Reviews = new HashSet<Review>();
-        }
     }
 }

@@ -1,22 +1,98 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-
-
+@*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+*@
 
 <section class="home" id="home">
     <div class="content">
-        <span>follow us</span>
+        <span style=" font-weight: bolder;
+            color: transparent;
+            -webkit-text-stroke: 0.1rem #fff;
+            font-size: 4vw;
+            display: block;">follow us</span>
         <h3>to the unknown</h3>
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quia
             illum quod perspiciatis harum in possimus? Totam consequuntur officia quia?
         </p>
-        <a class="btn-costom">book now</a>
+        <a class="btn-costom">see more...</a>
     </div>
 </section>
 <br />
 
+<partial name="Privacy" />
+
+<section class="home" id="home" style="
+background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(17, 17, 17, 0.7)), url(../Images/HomePage/bbb.jpg) no-repeat;
+ background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+">
+    <div class="content">
+        <h3 style=" font-weight: bolder;
+            font-family: 'Comic Sans MS';
+            color: transparent;
+            -webkit-text-stroke: 0.1rem #fff;
+            font-size: 4vw;
+            display: block;">
+            adventure is worthwhile
+        </h3>
+        <p style=" font-size: 4.5rem;
+            color: orange;
+            font-family:'Brush Script MT';
+            padding: .5rem 0;">
+            dicover new places with us
+        </p>
+        <p style=" font-size: 4.5rem;
+            font-family: cursive;
+            color: #fff;
+            font-family:'Brush Script MT';
+            padding: .5rem 0;">
+            adventure awaits
+        </p>
+    </div>
+</section>
+<br />
+
+<partial name="Services" />
+
+
+<section class="home" id="home" style="
+background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(17, 17, 17, 0.7)), url(../Images/HomePage/ccc.jpg) no-repeat;
+ background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+">
+    <div class="content">
+        <h3 style=" font-weight: bolder;
+            color: transparent;
+            -webkit-text-stroke: 0.1rem #fff;
+            font-size: 4vw;
+            display: block;">
+            The journey  
+        </h3>
+        <p style=" font-size: 2.5rem;
+            color: orange;
+            padding: .5rem 0;">
+            of a thousand miles
+        </p>
+        <p style=" font-size: 2.5rem;
+            font-family:cursive;
+            color: white;
+            padding: .5rem 0;">
+            miles begins with a single step
+        </p>
+    </div>
+</section>
+<br />
+
+<partial name="Gallery" />
+
+<partial name="ContactUs" />
 
 

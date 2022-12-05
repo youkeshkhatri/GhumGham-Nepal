@@ -62,14 +62,14 @@ section {
 
 
 .heading2 {
-    text-align: left;
+    text-align: center;
     padding: 2.5rem 0
 }
 
     .heading2 span {
         font-size: 3.5rem;
         background: rgba(255, 165, 0,.2);
-        color: var(--orange);
+        color: orange;
         border-radius: .5rem;
         padding: .2rem 1rem;
     }
@@ -152,12 +152,6 @@ section {
         padding-right: 0.5rem;
     }
 
-#menu-btn {
-    font-size: 2.5rem;
-    color: #fff;
-    cursor: pointer;
-    display: none;
-}
 
 .home {
     margin: 0 auto;
@@ -165,6 +159,9 @@ section {
     width: 90%;
     border-radius: 1rem;
     background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(17, 17, 17, 0.7)), url(../Images/HomePage/aaa.jpg) no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -179,7 +176,7 @@ section {
         text-align: center;
     }
 
-        .home .content span {
+        .home.content span {
             font-weight: bolder;
             color: transparent;
             -webkit-text-stroke: 0.1rem #fff;
@@ -199,6 +196,79 @@ section {
             color: #aaa;
             line-height: 2;
         }
+
+
+/*
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    position: relative;
+    z-index: 0;
+}
+
+    .home .content {
+        text-align: center;
+    }
+
+        .home .content h3 {
+            font-size: 4.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 .3rem .5rem rgba(0,0,0,.1);
+        }
+
+        .home .content p {
+            font-size: 2.5rem;
+            color: #fff;
+            padding: .5rem 0;
+        }
+
+    .home .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .home .controls {
+        padding: 1rem;
+        border-radius: 5rem;
+        background: rgba(0,0,0,.7);
+        position: relative;
+        top: 10rem;
+    }
+
+        .home .controls .vid-btn {
+            height: 2rem;
+            width: 2rem;
+            display: inline-block;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            margin: 0 .5rem;
+        }
+
+            .home .controls .vid-btn.active {
+                background: var(--orange);
+            }*/
+
+.parallax {
+    /* The image used */
+    border-radius: 1rem;
+    min-height: 600px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 
 
 /* #Region For Service Page*/
@@ -239,6 +309,109 @@ section {
         }
 
 /* #Endregion*/
+
+
+/* #Region For Gallery Page*/
+
+.gallery .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+    .gallery .box-container .box {
+        overflow: hidden;
+        box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
+        border: 1rem solid #fff;
+        border-radius: .5rem;
+        flex: 1 1 30rem;
+        height: 25rem;
+        position: relative;
+    }
+
+        .gallery .box-container .box img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .gallery .box-container .box .content {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            background: rgba(0,0,0,.7);
+            padding: 2rem;
+            padding-top: 5rem;
+        }
+
+        .gallery .box-container .box:hover .content {
+            top: 0;
+        }
+
+        .gallery .box-container .box .content h3 {
+            font-size: 2.5rem;
+            color: var(--orange);
+        }
+
+        .gallery .box-container .box .content p {
+            font-size: 1.5rem;
+            color: #eee;
+            padding: .5rem 0;
+        }
+
+/* #Endregion*/
+
+
+/* #Region For Contact Page*/
+.contact .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+    .contact .row .image {
+        flex: 1 1 35rem;
+    }
+
+        .contact .row .image img {
+            width: 100%;
+        }
+
+    .contact .row form {
+        flex: 1 1 50rem;
+        padding: 2rem;
+        box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
+        border-radius: .5rem;
+    }
+
+        .contact .row form .inputBox {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+            .contact .row form .inputBox input, .contact .row form textarea {
+                width: 49%;
+                margin: 1rem 0;
+                padding: 1rem;
+                font-size: 1.7rem;
+                color: #333;
+                background: #f7f7f7;
+                text-transform: none;
+            }
+
+        .contact .row form textarea {
+            height: 15rem;
+            resize: none;
+            width: 100%;
+        }
+
+/* Contact Page Endregion*/
+
 
 @media screen and (max-width: 1200px) {
     .inner-container {

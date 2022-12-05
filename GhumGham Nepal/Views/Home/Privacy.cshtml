@@ -1,8 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+<style>
+    #spinner {
+        display: none;
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background: url(spinner.gif) no-repeat center #fff;
+        text-align: center;
+        padding: 10px;
+        font: normal 16px Tahoma, Geneva, sans-serif;
+        border: 1px solid #666;
+        margin-left: -50px;
+        margin-top: -50px;
+        z-index: 2;
+        overflow: auto;
+    }
+</style>
 
+<div class="mt-5">
+    <p>.</p>
+</div>
 <div class="container-md">
     <h1 class="heading2 py-xxl-5 mt-xxl-5">
         <span class="space"></span>
@@ -16,9 +37,38 @@
         <span>s</span>
     </h1>
 
-    <div style="margin-top:8%; margin-bottom:15%;">
+    <div id="spinner">
+        Loading...
+    </div>
 
-        <h1 class="my-xxl-5 text-center text-white">Use this page to detail your site's privacy policy.</h1>
+    <div class="container-sm" style="margin-top:8%; margin-bottom:15%;">
+
+        <p class="my-xxl-5 text-white" style="text-align:left; font-size:x-large; font-family:Britannic;">
+            Ghumgham Nepal is a travel website that guide people to travel around the Nepal. 
+            Ghumgham Nepal provides top destination for travelling, photo gallery of different places, travel reviews, trip fares etc.  
+            This website not only provides the information of top destinated places but also of different local level places. 
+            With this website people can also contact hotels of different places for rooms as per their need. 
+            People can give reviews and feedback of the places they had visited & of the hotels they had visited. 
+            These feedbacks will help other people to choose their destination and hotels.
+        </p>
 
     </div>
 </div>
+
+<script type="text/javascript">
+    var spinnerVisible = false;
+    function showProgress() {
+        if (!spinnerVisible) {
+            $("div#spinner").fadeIn("fast");
+            spinnerVisible = true;
+        }
+    };
+    function hideProgress() {
+        if (spinnerVisible) {
+            var spinner = $("div#spinner");
+            spinner.stop();
+            spinner.fadeOut("fast");
+            spinnerVisible = false;
+        }
+    };
+</script>

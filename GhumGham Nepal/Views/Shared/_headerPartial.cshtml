@@ -1,0 +1,35 @@
+﻿<header class="header">
+
+    <a data-aos="zoom-in-left" data-aos-delay="150" asp-controller="Home" asp-action="Index" class="logo">GhumGham Nepal </a>
+
+    <nav class="navbar" style="margin-bottom: 0px;">
+        <a data-aos="zoom-in-left" data-aos-delay="300" asp-controller="Home" asp-action="Index">home</a>
+        <a data-aos="zoom-in-left" data-aos-delay="450" asp-controller="Home" asp-action="Privacy">about us</a>
+        <a data-aos="zoom-in-left" data-aos-delay="600" asp-controller="Places" asp-action="Index">destination</a>
+        <a data-aos="zoom-in-left" data-aos-delay="600" asp-controller="Home" asp-action="Services">services</a>
+        <a data-aos="zoom-in-left" data-aos-delay="600" asp-controller="Home" asp-action="Gallery">gallery</a>
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a data-aos="zoom-in-left" data-aos-delay="1150" asp-controller="UserDetails" asp-action="Index">Users</a>
+        }
+
+    </nav>
+
+
+    <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="https://aide.self.rigohr.com/\images\male.png" style="max-width: 100%; width: 40px; height: 40px; border-radius: 100%;" />
+            Profile
+        </button>
+        <div class="dropdown-menu py-4" aria-labelledby="dropdownMenuButton" style="align-content:center; text-align:center;">
+            <div class="dropdown-item">
+                <img src="https://aide.self.rigohr.com/\images\male.png" style="margin-left:5px; width: 80px; height: 80px; border-radius: 100%;" />
+            </div>
+            <div class="dropdown-item">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </div>
+
+</header>

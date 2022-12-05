@@ -8,7 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Registrations\**" />
+    <Content Remove="Views\Registrations\**" />
+    <EmbeddedResource Remove="Views\Registrations\**" />
+    <None Remove="Views\Registrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Factory\IPlaceMapper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\UserDetails\Create.cshtml" />
+    <Content Remove="Views\UserDetails\Delete.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

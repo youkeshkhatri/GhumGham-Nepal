@@ -4,10 +4,38 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="text-light">
+<div class="text-light" style="font-size:small;">
 
     <div class="container-sm" style="margin-top:120px">
-        <h2 style="">@Html.DisplayFor(model => model.PlaceName)</h2>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <h2>
+                        <span style="font-size: 3.5rem;
+        background: rgba(255, 165, 0,.2);
+        color: var(--orange);
+        border-radius: .5rem; width:auto;">
+
+                            @Html.DisplayFor(model => model.PlaceName)
+                        </span>
+                    </h2>
+                </div>
+                <div class="col">
+                    <div>
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary btn-lg">Edit</a>
+                        }
+                        <a asp-action="Index" class="btn btn-success btn-lg">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <p>@Html.DisplayFor(model => model.Location)</p>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -52,7 +80,15 @@
             <p class="card-text">@Html.DisplayFor(model => model.Description3)</p><br />
         </div>
         <div>
-            <h1 class="mb-4">Hotels</h1>
+            <h1 class="heading2 py-xxl-5 mt-xxl-5">
+                <span class="space"></span>
+                <span>h</span>
+                <span>o</span>
+                <span>t</span>
+                <span>e</span>
+                <span>l</span>
+                <span>s</span>
+            </h1>
         </div>
         <div>
             <p class="card-text">@Html.DisplayFor(model => model.Hotel1)</p><br />
@@ -64,10 +100,6 @@
             <p class="card-text">@Html.DisplayFor(model => model.Hotel3)</p><br />
         </div>
 
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> |
-            <a asp-action="Index" class="btn btn-success">Back</a>
-        </div>
     </div>
 
 
@@ -75,7 +107,7 @@
     <section class="reviews">
         <div class="row d-flex justify-content-center">
             <div class="col-md-10 col-xl-8 text-center">
-                <h3 class="mb-4">Reviews</h3>
+                <h1 class="mb-4">Reviews</h1>
                 <p class="mb-4 pb-2 mb-md-5 pb-md-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
                     numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum

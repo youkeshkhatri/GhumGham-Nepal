@@ -10,35 +10,43 @@
     <div class="container" style="padding-top:100px;">
 
         <div class="topnav">
-@*            <a style="font-size:xx-large">Places</a>
-*@
-            <h3 class="heading2">
-                <span class="space"></span>
-                <span>p</span>
-                <span>l</span>
-                <span>a</span>
-                <span>c</span>
-                <span>e</span>
-                <span>s</span>
-          
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-            </h3>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Create" class="btn btn-primary btn-lg mt-5 mx-5">
+                                <i class="fa fa-plus" style="font-size:30px;" aria-hidden="true"></i>
+                            </a>
+                        }
+                    </div>
+                    <div class="col">
+                        <h3 class="heading2">
+                            <span class="space"></span>
+                            <span>p</span>
+                            <span>l</span>
+                            <span>a</span>
+                            <span>c</span>
+                            <span>e</span>
+                            <span>s</span>
+
+                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                        </h3>
+                    </div>
+                </div>
+            </div>
 
         </div><br>
 
 
-        @if (User.Identity.IsAuthenticated)
-        {
-            <p>
-                <a asp-action="Create" class="btn btn-primary btn-lg">Create New</a>
-            </p>
-        }
+
         <div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-md-4  ">
                     <div class="card mb-5 shadow-sm pb-4 " style="border-radius:30px 30px 30px 30px ;">
-                        <img class="card-img-top animation-c" style="border-radius:30px 30px 0 0 ;" src="@item.ThumbnailUrl" alt="Card image cap">
+                        <img class="card-img-top animation-c" style="border-radius:30px 30px 0 0 ; height:300px;" src="@item.ThumbnailUrl" alt="Card image cap">
                         <div class="card-body">
 
                             <h2>
@@ -49,11 +57,11 @@
                             <p class="card-text ml-1">@item.Introduction</p>
 
                             <div class="stars" style="font-size:17px;color:orange; margin-left:3px;">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
                             </div>
 
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn-SeeMore rounded-pill mx-2">See More...</a>
@@ -62,7 +70,7 @@
 
                                 <div class="d-flex justify-content-between align-items-center">
 
-                                    @if (User.Identity.IsAuthenticated)
+                                    @if (User.Identity != null && User.Identity.IsAuthenticated)
                                     {
                                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-lg rounded-pill mx-2">Edit</a>
 
