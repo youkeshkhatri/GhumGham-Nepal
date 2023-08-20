@@ -1,0 +1,54 @@
+﻿@page
+@model RegisterModel
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<body class="bg-secondary bg-gradient text-light">
+    <div class="container-md py-5 text-center">
+
+        <div class="row">
+            <div class="col-md-4 py-3 mx-auto bg-dark bg-gradient shadow-lg" style="border-radius:1rem; box-shadow:rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                <h1 class="text-center fs-3 fw-bold mb-2 text-uppercase mt-3">Register</h1>
+                <p class="text-white-50 text-capitalize  ">Please enter your details</p>
+                <hr />
+
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="mx-5 px-3 mb-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Input.Email" class="control-label"></label>
+                        <input asp-for="Input.Email" class="form-control rounded-pill" autocomplete="username" aria-required="true" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password" class="control-label"></label>
+                        <input asp-for="Input.Password" class="form-control rounded-pill" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.ConfirmPassword" class="control-label"></label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control rounded-pill" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group d-flex justify-content-around ">
+                        <button id="registerSubmit" type="submit" class="btn btn-outline-light btn-primary btn-lg px-4">Register</button>
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-danger btn-outline-light px-4  btn-lg">Cancel</a>
+                    </div><br />
+                    <p>
+                        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an Account?</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
+        </div>
+    </body>

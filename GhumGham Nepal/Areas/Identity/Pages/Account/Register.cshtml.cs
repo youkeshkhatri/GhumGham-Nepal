@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Net;
+using GhumGhamNepal.Core.Services.EmailService;
+using GhumGhamNepal.Core.Enums;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
@@ -32,13 +34,15 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<GhumGham_NepalUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ISmtpEmailService _emailService;
 
         public RegisterModel(
             UserManager<GhumGham_NepalUser> userManager,
             IUserStore<GhumGham_NepalUser> userStore,
             SignInManager<GhumGham_NepalUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ISmtpEmailService emailService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -46,6 +50,7 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _emailService = emailService;
         }
 
         /// <summary>
@@ -139,8 +144,18 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var body = _emailService.GetEmailTemplateContent(EmailContentFile.EmailConfirmation);
+                    var subject = EmailSubject.EmailConfirmation;
+
+                    body = body.Replace("#UserName#", user.UserName)
+                        .Replace("#username#", user.UserName)
+                        .Replace("#Link#", callbackUrl)
+                        .Replace("#ResetURL#", callbackUrl);
+
+                    var sendEmailResp = await _emailService.SendAsync(subject, Input.Email, body).ConfigureAwait(false);
+
+                    //SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -162,33 +177,33 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private bool SendEmailAsync(string email, string subject, string confirmLink)
-        {
-            try
-            {
-                MailMessage message = new MailMessage();
-                message.From = new MailAddress("ghumghamnepal001@gmail.com");
-                message.To.Add(email);
-                message.Subject = subject;
-                message.IsBodyHtml = true;
-                message.Body = confirmLink;
+        //private bool SendEmailAsync(string email, string subject, string confirmLink)
+        //{
+        //    try
+        //    {
+        //        MailMessage message = new MailMessage();
+        //        message.From = new MailAddress("ghumghamnepal001@gmail.com");
+        //        message.To.Add(email);
+        //        message.Subject = subject;
+        //        message.IsBodyHtml = true;
+        //        message.Body = confirmLink;
 
-                SmtpClient smtpClient = new SmtpClient();
-                smtpClient.Port = 587;
-                smtpClient.Host = "smtp.gmail.com";
-                smtpClient.EnableSsl = true;
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("ghumghamnepal001@gmail.com", "dnydbsailrhxzaaj");
-                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtpClient.Send(message);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+        //        SmtpClient smtpClient = new SmtpClient();
+        //        smtpClient.Port = 587;
+        //        smtpClient.Host = "smtp.gmail.com";
+        //        smtpClient.EnableSsl = true;
+        //        smtpClient.UseDefaultCredentials = false;
+        //        smtpClient.Credentials = new NetworkCredential("ghumghamnepal001@gmail.com", "dnydbsailrhxzaaj");
+        //        smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+        //        smtpClient.Send(message);
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
 
-        }
+        //}
 
         private GhumGham_NepalUser CreateUser()
         {

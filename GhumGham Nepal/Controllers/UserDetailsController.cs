@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GhumGham_Nepal.Models;
 using Microsoft.AspNetCore.Authorization;
+using GhumGhamNepal.Core.ApplicationDbContext;
+using GhumGhamNepal.Core.Services.EmailService;
+using GhumGhamNepal.Core.Enums;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace GhumGham_Nepal.Controllers
 {
@@ -14,10 +18,12 @@ namespace GhumGham_Nepal.Controllers
     public class UserDetailsController : Controller
     {
         private readonly ProjectContext _context;
+        private readonly ISmtpEmailService _emailService;
 
-        public UserDetailsController(ProjectContext context)
+        public UserDetailsController(ProjectContext context, ISmtpEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         // GET: UserDetails
@@ -51,8 +57,6 @@ namespace GhumGham_Nepal.Controllers
         }
 
         // POST: UserDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AspNetUser aspNetUser)
@@ -83,10 +87,9 @@ namespace GhumGham_Nepal.Controllers
         }
 
         // POST: UserDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(ActionFilterAttribute))]
         public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AspNetUser aspNetUser)
         {
             if (id != aspNetUser.Id)
@@ -98,6 +101,15 @@ namespace GhumGham_Nepal.Controllers
             {
                 try
                 {
+                    var emailContent = _emailService.GetEmailTemplateContent(EmailContentFile.EmailConfirmation);
+                    var subject = "Password Update";
+
+                    var body = emailContent;
+                    body = body.Replace("#EmployeeName#", "User")
+                        .Replace("#OrganizationName#", "GhumGhamNepal");
+                    
+                    await _emailService.SendAsync(subject, aspNetUser.Email, body).ConfigureAwait(false);
+
                     _context.Update(aspNetUser);
                     await _context.SaveChangesAsync();
                 }
@@ -158,5 +170,5 @@ namespace GhumGham_Nepal.Controllers
         {
           return _context.AspNetUsers.Any(e => e.Id == id);
         }
-    }
+    }    
 }

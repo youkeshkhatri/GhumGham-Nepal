@@ -1,0 +1,19 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+}
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div class="container-sm">
+
+    <h1>@ViewData["Title"]</h1>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+
+    <a asp-area="Identity" asp-page="/Account/Login">Back to Login</a> &nbsp;
+    <a asp-controller="Home" asp-action="Index">Go to Home</a>
+
+</div>

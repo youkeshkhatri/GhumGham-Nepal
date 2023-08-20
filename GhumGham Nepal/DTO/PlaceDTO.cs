@@ -1,4 +1,6 @@
-﻿namespace GhumGham_Nepal.DTO
+﻿using GhumGham_Nepal.Models;
+
+namespace GhumGham_Nepal.DTO
 {
     public class PlaceDTO
     {
@@ -7,12 +9,8 @@
         public string? Location { get; set; }
         public string? Introduction { get; set; }
         public string? Description1 { get; set; }
-        public string? Description2 { get; set; }
-        public string? Description3 { get; set; }
-        public string? Hotel1 { get; set; }
-        public string? Hotel2 { get; set; }
-        public string? Hotel3 { get; set; }
-        public IFormFile? ThumbnailFile { get; set; }
+        public IFormFile? File { get; set; }
         public string? ThumbnailUrl { get; set; }
+        public PublicReviewDetails? Reviews { get; set; }
     }
 }

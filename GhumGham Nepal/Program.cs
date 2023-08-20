@@ -1,13 +1,20 @@
-using GhumGham_Nepal.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using GhumGham_Nepal.Areas.Identity.Data;
+using GhumGham_Nepal.Repository;
+using GhumGham_Nepal.Services;
+using GhumGhamNepal.Core.ApplicationDbContext;
+using GhumGhamNepal.Core.Services.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(ICommonAttachmentService), typeof(CommonAttachmentService));
+builder.Services.AddScoped(typeof(ISmtpEmailService), typeof(SmtpEmailService));
+builder.Services.AddLogging();
 
 
 builder.Services.AddDbContext<ProjectContext>
@@ -47,7 +54,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication();
 
 app.UseAuthorization();
 

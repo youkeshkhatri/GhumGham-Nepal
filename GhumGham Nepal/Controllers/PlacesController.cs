@@ -1,50 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GhumGham_Nepal.Models;
 using GhumGham_Nepal.DTO;
 using GhumGham_Nepal.Factory;
 using Microsoft.AspNetCore.Authorization;
+using GhumGham_Nepal.Repository;
+using GhumGham_Nepal.Services;
 
 namespace GhumGham_Nepal.Controllers
 {
+    //[Route("districts")]
     public class PlacesController : Controller
     {
-        #region ctor
+        #region ctor & prop
 
-        private readonly ProjectContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IRepository<Place> _placesRepository;
+        private readonly ICommonAttachmentService _commonAttachmentService;
 
-        public PlacesController(ProjectContext context, IWebHostEnvironment webHostEnvironment)
+        public PlacesController(IRepository<Place> placeRepository, ICommonAttachmentService attachmentService)
         {
-            _context = context;
-            _webHostEnvironment = webHostEnvironment;
-
+            _placesRepository = placeRepository;
+            _commonAttachmentService = attachmentService;
         }
         #endregion
 
         #region Read
-        // GET: Places
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var data = await _context.Places.ToListAsync();
-            return View(data.ToDTO());
+            var data = await _placesRepository.GetAllAsync().ConfigureAwait(false);
+            return View(data.ToList().ToDTO());
         }
 
-        // GET: Places/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
-        { 
-            if (id == null || _context.Places == null)
+        {
+            if (id == null || _placesRepository.Table == null)
             {
                 return NotFound();
             }
 
-            var place = await _context.Places
-                .FirstOrDefaultAsync(m => m.PlaceId == id);
+            var place = await _placesRepository.Table
+                .FirstOrDefaultAsync(m => m.PlaceId == id)
+                .ConfigureAwait(false);
+
             if (place == null)
             {
                 return NotFound();
@@ -56,53 +56,52 @@ namespace GhumGham_Nepal.Controllers
 
         #region Create
 
-        // GET: Places/Create
+        [HttpGet]
         [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Places/Create
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PlaceDTO place)
-        { 
+        public async Task<IActionResult> Create(PlaceDTO dto)
+        {
             if (ModelState.IsValid)
             {
-                if (place.ThumbnailFile != null)
+                List<IFormFile> picture = new List<IFormFile>();
+                if (dto.File != null)
                 {
-                    string folder = "Images/Places/Thumbnail/";
-                    folder += Guid.NewGuid().ToString() + "_" + place.ThumbnailFile.FileName;
+                    string folder = "/Images/Places/Thumbnail/";
+                    dto.ThumbnailUrl = folder;
 
-                    place.ThumbnailUrl = "/" + folder;
-
-                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-
-                    await place.ThumbnailFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    picture.Add(dto.File);
                 }
 
-                _context.Add(place.ToEntity());
-                await _context.SaveChangesAsync();
+                var attachmentUploadResp = _commonAttachmentService.UploadCommonAttachment(picture
+                   .Select(x => new FileUploadRequest(x.ReadBytes(), x.ContentType, x.FileName)).ToList());
+
+                await _placesRepository.AddAsync(dto.ToEntity(attachmentUploadResp.Data)).ConfigureAwait(false);
+                await _placesRepository.CommitAsync().ConfigureAwait(false);
                 return RedirectToAction(nameof(Index));
             }
-            return View(place);
+            return View(dto);
         }
         #endregion
 
         #region Edit
 
         [Authorize]
-        // GET: Places/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Places == null)
+            if (id == null || _placesRepository.Table == null)
             {
                 return NotFound();
             }
 
-            var place = await _context.Places.FindAsync(id);
+            var place = await _placesRepository.GetByIdAsync(id.Value).ConfigureAwait(false);
             if (place == null)
             {
                 return NotFound();
@@ -111,89 +110,108 @@ namespace GhumGham_Nepal.Controllers
             return View(res);
         }
 
-        // POST: Places/Edit/5
         [Authorize]
-        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, PlaceDTO place)
+        public async Task<IActionResult> Edit(int id, PlaceDTO dto)
         {
-            if (id != place.Id)
-            {
+            if (id != dto.Id)
                 return NotFound();
+
+            if (dto.ThumbnailUrl != null)
+            {
+                string[] url = dto.ThumbnailUrl.Split('/');
+
+                string empty = url[0];  
+                string image = url[1];  
+                string place = url[2]; 
+                string thumbnail = url[3]; 
+                string serverFileName = url[4]; 
+
+                List<string> files = new() { serverFileName };
+                _commonAttachmentService.DeleteFile(files);
             }
+
+            List<IFormFile> picture = new();
+            if (dto.File != null)
+            {
+                string folder = "/Images/Places/Thumbnail/";
+                dto.ThumbnailUrl = folder;
+
+                picture.Add(dto.File);
+            }
+
+            var attachmentUploadResp = _commonAttachmentService.UploadCommonAttachment(picture
+               .Select(x => new FileUploadRequest(x.ReadBytes(), x.ContentType, x.FileName)).ToList());
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(place.ToEntity());
-                    await _context.SaveChangesAsync();
+                    _placesRepository.Update(dto.ToEntity(attachmentUploadResp.Data));
+                    await _placesRepository.CommitAsync().ConfigureAwait(false);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!PlaceExists(place.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(place);
+
+            return View(dto);
         }
 
-        private bool PlaceExists(int id)
-        {
-            return (_context.Places?.Any(e => e.PlaceId == id)).GetValueOrDefault();
-        }
         #endregion
 
         #region Delete
 
+        //[Authorize]
+        //[HttpGet]
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null || _placesRepository.Table == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // GET: Places/Delete/5
-        [Authorize]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Places == null)
-            {
-                return NotFound();
-            }
+        //    var place = await _placesRepository.Table
+        //        .FirstOrDefaultAsync(m => m.PlaceId == id);
+        //    if (place == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var place = await _context.Places
-                .FirstOrDefaultAsync(m => m.PlaceId == id);
-            if (place == null)
-            {
-                return NotFound();
-            }
+        //    return View(place);
+        //}
 
-            return View(place);
-        }
-
-        // POST: Places/Delete/5
         [Authorize]
         [HttpPost, ActionName("Delete")]
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Places == null)
+            if (_placesRepository.Table == null)
             {
                 return Problem("Entity set 'ProjectContext.Places'  is null.");
             }
-            var place = await _context.Places.FindAsync(id);
+            var place = await _placesRepository.GetByIdAsync(id).ConfigureAwait(false);
             if (place != null)
             {
-                _context.Places.Remove(place);
+
+                if (place.ServerFileName != null)
+                {
+                    List<string> files = new() { place.ServerFileName };
+                    _commonAttachmentService.DeleteFile(files);
+                }
+
+                _placesRepository.Delete(place);
+                await _placesRepository.CommitAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         #endregion
-        
+
     }
 }

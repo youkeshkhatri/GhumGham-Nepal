@@ -5,21 +5,36 @@ namespace GhumGham_Nepal.Factory
 {
     public static class PlaceMapper
     {
-        public static Place ToEntity(this PlaceDTO dto)
+        public static Place ToEntity(this PlaceDTO dto, List<CommonAttachment> attachments)
         {
-            Place entity = new()
+            Place entity = new();
+            if(attachments != null && attachments.Count > 0)
             {
-                PlaceId = dto.Id,
-                PlaceName = dto.PlaceName,
-                Introduction = dto.Introduction,
-                Description1 = dto.Description1,
-                Description2 = dto.Description2,
-                Description3 = dto.Description3,
-                Hotel1 = dto.Hotel1,
-                Hotel2 = dto.Hotel2,
-                Hotel3 = dto.Hotel3,
-                ThumbnailUrl = dto.ThumbnailUrl
-            };
+                foreach (var item in attachments)
+                {
+                    entity.FileFormat = item.FileFormat;
+                    entity.Size = item.Size;
+                    entity.FileType = item.FileType;
+                    entity.ServerFileName = item.ServerFileName;
+                    entity.UserFileName = item.UserFileName;
+                    entity.FileLocation = item.FileLocation;
+
+                    entity.ThumbnailUrl += dto.ThumbnailUrl + item.ServerFileName;
+                }
+            }
+            else
+            {
+                entity.FileFormat = null;
+                entity.Size = null;
+                entity.FileType = null;
+                entity.ServerFileName = null;
+                entity.UserFileName = null;
+                entity.FileLocation = null;
+            }
+            entity.PlaceId = dto.Id;
+            entity.PlaceName = dto.PlaceName;
+            entity.Introduction = dto.Introduction;
+            entity.Description1 = dto.Description1;
 
             return entity;
         }
@@ -35,11 +50,6 @@ namespace GhumGham_Nepal.Factory
                 PlaceName = x.PlaceName,
                 Introduction = x.Introduction,
                 Description1 = x.Description1,
-                Description2 = x.Description2,
-                Description3 = x.Description3,
-                Hotel1 = x.Hotel1,
-                Hotel2 = x.Hotel2,
-                Hotel3 = x.Hotel3,
                 ThumbnailUrl = x.ThumbnailUrl
             }).ToList();
 
@@ -57,11 +67,6 @@ namespace GhumGham_Nepal.Factory
                 PlaceName = entity.PlaceName,
                 Introduction = entity.Introduction,
                 Description1 = entity.Description1,
-                Description2 = entity.Description2,
-                Description3 = entity.Description3,
-                Hotel1 = entity.Hotel1,
-                Hotel2 = entity.Hotel2,
-                Hotel3 = entity.Hotel3,
                 ThumbnailUrl = entity.ThumbnailUrl
             };
 

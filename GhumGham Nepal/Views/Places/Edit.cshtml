@@ -16,7 +16,7 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Edit">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
@@ -35,31 +35,6 @@
                     <span asp-validation-for="Description1" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Description2" class="control-label"></label>
-                    <textarea asp-for="Description2" class="form-control" rows="7"></textarea>
-                    <span asp-validation-for="Description2" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description3" class="control-label"></label>
-                    <textarea asp-for="Description3" class="form-control" rows="7"></textarea>
-                    <span asp-validation-for="Description3" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Hotel1" class="control-label"></label>
-                    <textarea asp-for="Hotel1" class="form-control" rows="7"></textarea>
-                    <span asp-validation-for="Hotel1" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Hotel2" class="control-label"></label>
-                    <textarea asp-for="Hotel2" class="form-control" rows="7"></textarea>
-                    <span asp-validation-for="Hotel2" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Hotel3" class="control-label"></label>
-                    <textarea asp-for="Hotel3" class="form-control" rows="7"></textarea>
-                    <span asp-validation-for="Hotel3" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="Location" class="control-label"></label>
                     <input asp-for="Location" class="form-control" />
                     <span asp-validation-for="Location" class="text-danger"></span>
@@ -72,6 +47,14 @@
                     <input asp-for="ThumbnailUrl" class="form-control" />
                     <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
                 </div>*@
+                <div class="form-group">
+                    <label asp-for="File" class="control-label">Choose Cover Photo</label>
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="customFile"></label>
+                        <input asp-for="File" class="form-control custom-file-input" id="customFile">
+                    </div>
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div><br />
                 
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />

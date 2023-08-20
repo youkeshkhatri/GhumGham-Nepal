@@ -24,6 +24,8 @@ namespace GhumGham_Nepal.Models
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<Place> Places { get; set; } = null!;
         public virtual DbSet<Registration> Registrations { get; set; } = null!;
+        public virtual DbSet<PublicReviewDetails> PublicReviewDetails { get; set; } = null!;
+        public virtual DbSet<CommonAttachment> CommonAttachments { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -127,16 +129,6 @@ namespace GhumGham_Nepal.Models
             modelBuilder.Entity<Place>(entity =>
             {
                 entity.Property(e => e.Description1).IsUnicode(false);
-
-                entity.Property(e => e.Description2).IsUnicode(false);
-
-                entity.Property(e => e.Description3).IsUnicode(false);
-
-                entity.Property(e => e.Hotel1).IsUnicode(false);
-
-                entity.Property(e => e.Hotel2).IsUnicode(false);
-
-                entity.Property(e => e.Hotel3).IsUnicode(false);
 
                 entity.Property(e => e.Introduction)
                     .HasMaxLength(500)

@@ -73,13 +73,8 @@
         <div>
             <p class="card-text">@Html.DisplayFor(model => model.Description1)</p><br />
         </div>
-        <div>
-            <p class="card-text">@Html.DisplayFor(model => model.Description2)</p><br />
-        </div>
-        <div>
-            <p class="card-text">@Html.DisplayFor(model => model.Description3)</p><br />
-        </div>
-        <div>
+        
+       @*  <div>
             <h1 class="heading2 py-xxl-5 mt-xxl-5">
                 <span class="space"></span>
                 <span>h</span>
@@ -89,16 +84,8 @@
                 <span>l</span>
                 <span>s</span>
             </h1>
-        </div>
-        <div>
-            <p class="card-text">@Html.DisplayFor(model => model.Hotel1)</p><br />
-        </div>
-        <div>
-            <p class="card-text">@Html.DisplayFor(model => model.Hotel2)</p><br />
-        </div>
-        <div>
-            <p class="card-text">@Html.DisplayFor(model => model.Hotel3)</p><br />
-        </div>
+        </div> *@
+
 
     </div>
 
@@ -120,6 +107,7 @@
             <div class="col-md-4 mb-5 mb-md-0">
                 <div class="d-flex justify-content-center mb-4">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+                    @*<img src="@Html.DisplayFor(model => model.ThumbnailUrl)"*@
                          class="rounded-circle shadow-1-strong" width="150" height="150" />
                 </div>
                 <h5 class="mb-3">Maria Smantha</h5>
@@ -201,12 +189,45 @@
                         <i class="fas fa-star fa-sm text-warning"></i>
                     </li>
                     <li>
-                        <i class="far fa-star fa-sm text-warning"></i>
+                        <i class="fas fa-star-half-alt fa-sm text-warning"></i>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
+
+
+    <!-- Previous code in the view... -->
+
+    <section class="reviews">
+        <!-- Existing code for displaying reviews... -->
+        <!-- Form to add a new review -->
+        <h2>Add a Review</h2>
+        <form asp-controller="PublicReviewDetails" asp-action="AddReview" method="post">
+            <div class="form-group" hidden>
+                <label for="PlaceId">PlaceId</label>
+                <input type="text" class="form-control" id="PlaceId" name="PlaceId" value="@Html.DisplayFor(model => model.Id)" required>
+            </div>
+            <div class="form-group">
+                <label for="ReviewerName">Name</label>
+                <input type="text" class="form-control" id="ReviewerName" name="ReviewerName" required>
+            </div>
+            <div class="form-group">
+                <label for="Role">Role</label>
+                <input type="text" class="form-control" id="Role" name="Role" required>
+            </div>
+            <div class="form-group">
+                <label for="ReviewText">Review</label>
+                <textarea class="form-control" id="ReviewText" name="ReviewText" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Rating">Rating</label>
+                <input type="number" class="form-control" id="Rating" name="Rating" min="1" max="5" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+    </section>
+
 
 </div>
 
