@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using GhumGham_Nepal.Areas.Identity.Data;
+using GhumGhamNepal.Core.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +18,13 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {
-        private readonly UserManager<GhumGham_NepalUser> _userManager;
-        private readonly SignInManager<GhumGham_NepalUser> _signInManager;
+        private readonly UserManager<GhumGhamNepalUser> _userManager;
+        private readonly SignInManager<GhumGhamNepalUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<GhumGham_NepalUser> userManager,
-            SignInManager<GhumGham_NepalUser> signInManager,
+            UserManager<GhumGhamNepalUser> userManager,
+            SignInManager<GhumGhamNepalUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -74,7 +74,7 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(GhumGham_NepalUser user)
+        private async Task LoadAsync(GhumGhamNepalUser user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;

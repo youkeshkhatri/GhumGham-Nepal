@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using GhumGham_Nepal.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -23,23 +22,24 @@ using System.Net.Mail;
 using System.Net;
 using GhumGhamNepal.Core.Services.EmailService;
 using GhumGhamNepal.Core.Enums;
+using GhumGhamNepal.Core.Models.Identity;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<GhumGham_NepalUser> _signInManager;
-        private readonly UserManager<GhumGham_NepalUser> _userManager;
-        private readonly IUserStore<GhumGham_NepalUser> _userStore;
-        private readonly IUserEmailStore<GhumGham_NepalUser> _emailStore;
+        private readonly SignInManager<GhumGhamNepalUser> _signInManager;
+        private readonly UserManager<GhumGhamNepalUser> _userManager;
+        private readonly IUserStore<GhumGhamNepalUser> _userStore;
+        private readonly IUserEmailStore<GhumGhamNepalUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ISmtpEmailService _emailService;
 
         public RegisterModel(
-            UserManager<GhumGham_NepalUser> userManager,
-            IUserStore<GhumGham_NepalUser> userStore,
-            SignInManager<GhumGham_NepalUser> signInManager,
+            UserManager<GhumGhamNepalUser> userManager,
+            IUserStore<GhumGhamNepalUser> userStore,
+            SignInManager<GhumGhamNepalUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             ISmtpEmailService emailService)
@@ -205,27 +205,27 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 
         //}
 
-        private GhumGham_NepalUser CreateUser()
+        private GhumGhamNepalUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<GhumGham_NepalUser>();
+                return Activator.CreateInstance<GhumGhamNepalUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(GhumGham_NepalUser)}'. " +
-                    $"Ensure that '{nameof(GhumGham_NepalUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(GhumGhamNepalUser)}'. " +
+                    $"Ensure that '{nameof(GhumGhamNepalUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<GhumGham_NepalUser> GetEmailStore()
+        private IUserEmailStore<GhumGhamNepalUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<GhumGham_NepalUser>)_userStore;
+            return (IUserEmailStore<GhumGhamNepalUser>)_userStore;
         }
     }
 }

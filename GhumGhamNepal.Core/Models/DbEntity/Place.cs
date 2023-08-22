@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace GhumGham_Nepal.Models
+namespace GhumGhamNepal.Core.Models.DbEntity
 {
     public partial class Place
     {

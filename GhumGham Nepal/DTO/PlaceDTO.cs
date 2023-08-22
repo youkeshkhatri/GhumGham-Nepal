@@ -1,4 +1,4 @@
-﻿using GhumGham_Nepal.Models;
+﻿using GhumGhamNepal.Core.Models.DbEntity;
 
 namespace GhumGham_Nepal.DTO
 {

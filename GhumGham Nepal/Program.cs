@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using GhumGham_Nepal.Areas.Identity.Data;
 using GhumGham_Nepal.Repository;
-using GhumGham_Nepal.Services;
 using GhumGhamNepal.Core.ApplicationDbContext;
 using GhumGhamNepal.Core.Services.EmailService;
+using GhumGhamNepal.Core.Models.Identity;
+using GhumGhamNepal.Core.Services.AttachmentService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +26,7 @@ builder.Services.AddDbContext<IdentityProjectContext>
     (builder.Configuration.GetConnectionString("dbconn")));
 
 
-builder.Services.AddDefaultIdentity<GhumGham_NepalUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<GhumGhamNepalUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<IdentityProjectContext>();
 
 builder.Services.Configure<IdentityOptions>(options =>

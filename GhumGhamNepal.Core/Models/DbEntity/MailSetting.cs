@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GhumGhamNepal.Core.Models
+namespace GhumGhamNepal.Core.Models.DbEntity
 {
     [Table("MailSetting")]
     public class MailSetting

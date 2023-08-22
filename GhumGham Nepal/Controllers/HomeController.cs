@@ -1,4 +1,4 @@
-﻿using GhumGham_Nepal.Models;
+﻿using GhumGhamNepal.Core.Models.DbEntity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

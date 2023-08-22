@@ -1,4 +1,4 @@
-namespace GhumGham_Nepal.Models
+namespace GhumGhamNepal.Core.Models.DbEntity
 {
     public class ErrorViewModel
     {

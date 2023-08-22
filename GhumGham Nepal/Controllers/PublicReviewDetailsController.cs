@@ -1,6 +1,5 @@
-﻿using GhumGham_Nepal.DTO;
-using GhumGham_Nepal.Models;
-using GhumGhamNepal.Core.ApplicationDbContext;
+﻿using GhumGhamNepal.Core.ApplicationDbContext;
+using GhumGhamNepal.Core.Models.DbEntity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GhumGham_Nepal.Controllers

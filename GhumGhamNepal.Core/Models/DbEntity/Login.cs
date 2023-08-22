@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GhumGham_Nepal.Models
+namespace GhumGhamNepal.Core.Models.DbEntity
 {
     public partial class Login
     {

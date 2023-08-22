@@ -1,5 +1,5 @@
-﻿using GhumGham_Nepal.Models;
-using GhumGhamNepal.Core.Models;
+﻿using GhumGhamNepal.Core.Models.AspNetEntity;
+using GhumGhamNepal.Core.Models.DbEntity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GhumGhamNepal.Core.ApplicationDbContext

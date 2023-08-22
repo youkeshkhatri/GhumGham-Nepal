@@ -6,22 +6,22 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using GhumGham_Nepal.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using GhumGhamNepal.Core.Models.Identity;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<GhumGham_NepalUser> _userManager;
+        private readonly UserManager<GhumGhamNepalUser> _userManager;
         private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<GhumGham_NepalUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<GhumGhamNepalUser> userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;

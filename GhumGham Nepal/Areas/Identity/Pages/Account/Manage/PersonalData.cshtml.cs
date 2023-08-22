@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Threading.Tasks;
-using GhumGham_Nepal.Areas.Identity.Data;
+using GhumGhamNepal.Core.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,11 +12,11 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<GhumGham_NepalUser> _userManager;
+        private readonly UserManager<GhumGhamNepalUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<GhumGham_NepalUser> userManager,
+            UserManager<GhumGhamNepalUser> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

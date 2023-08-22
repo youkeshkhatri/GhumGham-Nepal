@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GhumGham_Nepal.Models;
 using GhumGham_Nepal.DTO;
 using GhumGham_Nepal.Factory;
 using Microsoft.AspNetCore.Authorization;
 using GhumGham_Nepal.Repository;
-using GhumGham_Nepal.Services;
+using GhumGhamNepal.Core.Models.DbEntity;
+using GhumGhamNepal.Core.Services.AttachmentService;
 
 namespace GhumGham_Nepal.Controllers
 {

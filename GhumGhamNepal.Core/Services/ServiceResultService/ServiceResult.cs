@@ -1,4 +1,6 @@
-﻿namespace GhumGham_Nepal.Services
+﻿using GhumGhamNepal.Core.Services.ServiceResultService;
+
+namespace GhumGham_Nepal.Services
 {
     public class ServiceResult : IServiceResult
     {

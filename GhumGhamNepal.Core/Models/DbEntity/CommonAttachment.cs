@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GhumGham_Nepal.Models
+namespace GhumGhamNepal.Core.Models.DbEntity
 {
     [Table("HR_CommonAttachment")]
-    public class CommonAttachment 
+    public class CommonAttachment
     {
         [Key]
         public long AttachmentID { get; set; }

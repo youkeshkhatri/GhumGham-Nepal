@@ -4,10 +4,10 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using System.Text.RegularExpressions;
 using GhumGham_Nepal.Services;
-using GhumGhamNepal.Core.Models;
 using GhumGham_Nepal.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using GhumGhamNepal.Core.Models.DbEntity;
 
 namespace GhumGhamNepal.Core.Services.EmailService
 {

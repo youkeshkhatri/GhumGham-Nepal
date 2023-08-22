@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GhumGham_Nepal.Models;
 using Microsoft.AspNetCore.Authorization;
 using GhumGhamNepal.Core.ApplicationDbContext;
 using GhumGhamNepal.Core.Services.EmailService;
 using GhumGhamNepal.Core.Enums;
 using Microsoft.AspNetCore.Mvc.Filters;
+using GhumGhamNepal.Core.Models.AspNetEntity;
 
 namespace GhumGham_Nepal.Controllers
 {

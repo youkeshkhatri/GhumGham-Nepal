@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using GhumGham_Nepal.Areas.Identity.Data;
+using GhumGhamNepal.Core.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,12 +15,12 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<GhumGham_NepalUser> _userManager;
-        private readonly SignInManager<GhumGham_NepalUser> _signInManager;
+        private readonly UserManager<GhumGhamNepalUser> _userManager;
+        private readonly SignInManager<GhumGhamNepalUser> _signInManager;
 
         public IndexModel(
-            UserManager<GhumGham_NepalUser> userManager,
-            SignInManager<GhumGham_NepalUser> signInManager)
+            UserManager<GhumGhamNepalUser> userManager,
+            SignInManager<GhumGhamNepalUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -61,7 +61,7 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(GhumGham_NepalUser user)
+        private async Task LoadAsync(GhumGhamNepalUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

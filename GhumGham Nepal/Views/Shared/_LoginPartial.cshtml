@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using GhumGham_Nepal.Areas.Identity.Data
+@using GhumGhamNepal.Core.Models.Identity
 
-@inject SignInManager<GhumGham_NepalUser> SignInManager
-@inject UserManager<GhumGham_NepalUser> UserManager
+@inject SignInManager<GhumGhamNepalUser> SignInManager
+@inject UserManager<GhumGhamNepalUser> UserManager
 
 <ul class="navbar-nav" style="margin-left:20px;">
     @if (SignInManager.IsSignedIn(User))

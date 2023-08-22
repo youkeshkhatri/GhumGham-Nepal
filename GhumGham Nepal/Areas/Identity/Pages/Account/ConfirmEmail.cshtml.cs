@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using GhumGham_Nepal.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using GhumGhamNepal.Core.Models.Identity;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<GhumGham_NepalUser> _userManager;
+        private readonly UserManager<GhumGhamNepalUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<GhumGham_NepalUser> userManager)
+        public ConfirmEmailModel(UserManager<GhumGhamNepalUser> userManager)
         {
             _userManager = userManager;
         }

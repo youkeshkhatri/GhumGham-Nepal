@@ -1,11 +1,10 @@
-﻿using GhumGham_Nepal.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GhumGham_Nepal.Areas.Identity.Data;
+namespace GhumGhamNepal.Core.Models.Identity;
 
-public class IdentityProjectContext : IdentityDbContext<GhumGham_NepalUser>
+public class IdentityProjectContext : IdentityDbContext<GhumGhamNepalUser>
 {
     public IdentityProjectContext(DbContextOptions<IdentityProjectContext> options)
         : base(options)

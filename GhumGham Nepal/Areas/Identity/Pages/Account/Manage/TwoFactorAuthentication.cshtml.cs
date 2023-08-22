@@ -4,7 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
-using GhumGham_Nepal.Areas.Identity.Data;
+using GhumGhamNepal.Core.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,12 +14,12 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
 {
     public class TwoFactorAuthenticationModel : PageModel
     {
-        private readonly UserManager<GhumGham_NepalUser> _userManager;
-        private readonly SignInManager<GhumGham_NepalUser> _signInManager;
+        private readonly UserManager<GhumGhamNepalUser> _userManager;
+        private readonly SignInManager<GhumGhamNepalUser> _signInManager;
         private readonly ILogger<TwoFactorAuthenticationModel> _logger;
 
         public TwoFactorAuthenticationModel(
-            UserManager<GhumGham_NepalUser> userManager, SignInManager<GhumGham_NepalUser> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
+            UserManager<GhumGhamNepalUser> userManager, SignInManager<GhumGhamNepalUser> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;

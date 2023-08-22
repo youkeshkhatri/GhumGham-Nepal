@@ -1,5 +1,5 @@
 ﻿using GhumGham_Nepal.DTO;
-using GhumGham_Nepal.Models;
+using GhumGhamNepal.Core.Models.DbEntity;
 
 namespace GhumGham_Nepal.Factory
 {
