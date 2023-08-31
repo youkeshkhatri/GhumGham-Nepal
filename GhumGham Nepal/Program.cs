@@ -5,6 +5,7 @@ using GhumGhamNepal.Core.ApplicationDbContext;
 using GhumGhamNepal.Core.Services.EmailService;
 using GhumGhamNepal.Core.Models.Identity;
 using GhumGhamNepal.Core.Services.AttachmentService;
+using GhumGhamNepal.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(ICommonAttachmentService), typeof(CommonAttachmentService));
 builder.Services.AddScoped(typeof(ISmtpEmailService), typeof(SmtpEmailService));
+builder.Services.AddScoped(typeof(IHttpContextService), typeof(HttpContextService));
 builder.Services.AddLogging();
 
 

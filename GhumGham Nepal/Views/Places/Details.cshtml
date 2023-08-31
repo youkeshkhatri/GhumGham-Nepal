@@ -6,6 +6,8 @@
 
 <div class="text-light" style="font-size:small;">
 
+    <partial name="_StatusMessagePartial" model="@TempData["Message"]" />
+
     <div class="container-sm" style="margin-top:120px">
 
 
@@ -73,22 +75,21 @@
         <div>
             <p class="card-text">@Html.DisplayFor(model => model.Description1)</p><br />
         </div>
-        
-       @*  <div>
-            <h1 class="heading2 py-xxl-5 mt-xxl-5">
-                <span class="space"></span>
-                <span>h</span>
-                <span>o</span>
-                <span>t</span>
-                <span>e</span>
-                <span>l</span>
-                <span>s</span>
-            </h1>
+
+        @*  <div>
+        <h1 class="heading2 py-xxl-5 mt-xxl-5">
+        <span class="space"></span>
+        <span>h</span>
+        <span>o</span>
+        <span>t</span>
+        <span>e</span>
+        <span>l</span>
+        <span>s</span>
+        </h1>
         </div> *@
 
 
     </div>
-
 
 
     <section class="reviews">
@@ -197,35 +198,66 @@
     </section>
 
 
-    <!-- Previous code in the view... -->
+    <section class"addReview">
+        <link rel="stylesheet" type="text/css" href="~/css/popup.css" />
 
-    <section class="reviews">
-        <!-- Existing code for displaying reviews... -->
-        <!-- Form to add a new review -->
-        <h2>Add a Review</h2>
-        <form asp-controller="PublicReviewDetails" asp-action="AddReview" method="post">
-            <div class="form-group" hidden>
-                <label for="PlaceId">PlaceId</label>
-                <input type="text" class="form-control" id="PlaceId" name="PlaceId" value="@Html.DisplayFor(model => model.Id)" required>
-            </div>
-            <div class="form-group">
-                <label for="ReviewerName">Name</label>
-                <input type="text" class="form-control" id="ReviewerName" name="ReviewerName" required>
-            </div>
-            <div class="form-group">
-                <label for="Role">Role</label>
-                <input type="text" class="form-control" id="Role" name="Role" required>
-            </div>
-            <div class="form-group">
-                <label for="ReviewText">Review</label>
-                <textarea class="form-control" id="ReviewText" name="ReviewText" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="Rating">Rating</label>
-                <input type="number" class="form-control" id="Rating" name="Rating" min="1" max="5" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit Review</button>
-        </form>
+
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Add Review</button>
+
+        <div id="id01" class="modal">
+
+            <form asp-controller="PublicReviewDetails" asp-action="AddReview" class="modal-content animate" method="post">
+                 <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+@*                 <img src="img_avatar2.png" alt="Avatar" class="avatar">
+ *@                </div>
+
+                <div class="container">
+                    <h2 class="mt-2"></h2>
+
+                    <div class="form-group" hidden>
+                        <label for="PlaceId">PlaceId</label>
+                        <input type="text" class="form-control" id="PlaceId" name="PlaceId" value="@Html.DisplayFor(model => model.Id)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ReviewerName">Name</label>
+                        <input type="text" class="form-control" id="ReviewerName" name="ReviewerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Role">Role</label>
+                        <input type="text" class="form-control" id="Role" name="Role" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ReviewText">Review</label>
+                        <textarea class="form-control" id="ReviewText" name="ReviewText" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Rating">Rating</label>
+                        <input type="number" class="form-control" id="Rating" name="Rating" min="1" max="5" required>
+                    </div>
+                </div>
+
+                <div class="form-group d-flex justify-content-around " style="background-color:gray">
+                    <button type="submit" class="addreviewbtn">Submit Review</button>
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                </div>
+
+            </form>
+        </div>
+
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+
     </section>
 
 

@@ -1,5 +1,8 @@
-﻿using GhumGhamNepal.Core.ApplicationDbContext;
+﻿using GhumGham_Nepal.Services;
+using GhumGham_Nepal.Services.GhumGham_Nepal.Services;
+using GhumGhamNepal.Core.ApplicationDbContext;
 using GhumGhamNepal.Core.Models.DbEntity;
+using GhumGhamNepal.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GhumGham_Nepal.Controllers
@@ -10,12 +13,13 @@ namespace GhumGham_Nepal.Controllers
 
         private readonly ProjectContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHttpContextService _httpContext;
 
-        public PublicReviewDetailsController(ProjectContext context, IWebHostEnvironment webHostEnvironment)
+        public PublicReviewDetailsController(ProjectContext context, IWebHostEnvironment webHostEnvironment, IHttpContextService httpContext)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
-
+            _httpContext = httpContext;
         }
         #endregion
 
@@ -27,6 +31,8 @@ namespace GhumGham_Nepal.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReview(int PlaceId, string ReviewerName, string Role, string ReviewText, int Rating)
         {
+            var currentUser = _httpContext.User.UserName;
+
             // Create a new review object and populate it
             var newReview = new PublicReviewDetails
             {
@@ -36,15 +42,25 @@ namespace GhumGham_Nepal.Controllers
                 Comment = ReviewText
             };
 
-            // Add the new review to the place's Reviews collection
-            //place.Reviews.Add(newReview);
-            await _context.PublicReviewDetails.AddAsync(newReview);
-            await _context.SaveChangesAsync();
-
-            // You may want to save the place data to your data source here...
+            var resp = await AddReviewAsync(newReview).ConfigureAwait(false);
+            TempData["Message"] = resp.Message.FirstOrDefault();
 
             // Redirect back to the details page
             return RedirectToAction("Details", "Places", new { id = PlaceId });
+        }
+
+        private async Task<ServiceResult> AddReviewAsync(PublicReviewDetails entity)
+        {
+            try
+            {
+                await _context.PublicReviewDetails.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return ServiceResult.Success("Review added successfully!");
+            }
+            catch (Exception)
+            {
+                return ServiceResult.Fail("Error while adding review!");
+            }
         }
 
     }

@@ -1,0 +1,82 @@
+﻿@model string
+
+<style>
+    /* Add these styles to your CSS file */
+    .popup-message {
+        position: fixed;
+        bottom: 20px; /* Adjust to position the message vertically */
+        right: 20px; /* Adjust to position the message horizontally */
+        padding: 10px 20px; /* Adjust padding to control the size */
+        min-width: 250px; /* Set a minimum width to ensure readability */
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        opacity: 0; /* Initially hidden */
+        transform: translateX(100%);
+        z-index: 9999; /* Set a high z-index to ensure visibility */
+    }
+
+        .popup-message.success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .popup-message.danger {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .popup-message.show {
+            opacity: 1; /* Show the message */
+            transform: translateX(0);
+        }
+
+        .popup-message .close-popup {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .popup-message strong {
+            font-weight: bold; /* Apply bold styling to the <strong> tag */
+        }
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Show the pop-up message and start timer for auto-removal
+        function showPopupMessage() {
+            $('#popupMessage').addClass('show');
+            setTimeout(function () {
+                hidePopupMessage();
+            }, 5000); // 5000 milliseconds (5 seconds)
+        }
+
+        // Hide the pop-up message
+        function hidePopupMessage() {
+            $('#popupMessage').removeClass('show');
+        }
+
+        // Close button click event
+        $('.close-popup').on('click', function () {
+            hidePopupMessage();
+        });
+
+        // Initial call to show the message
+        showPopupMessage();
+    });
+</script>
+
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
+
+    <div id="popupMessage" class="popup-message @statusMessageClass">
+        <button type="button" class="close-popup">×</button>
+        @Model
+    </div>
+}
