@@ -31,7 +31,7 @@ namespace GhumGham_Nepal.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReview(int PlaceId, string ReviewerName, string Role, string ReviewText, int Rating)
         {
-            var currentUser = _httpContext.User.UserName;
+            var userId = _httpContext.User.UserId;
 
             // Create a new review object and populate it
             var newReview = new PublicReviewDetails
@@ -39,7 +39,8 @@ namespace GhumGham_Nepal.Controllers
                 PlaceId = PlaceId,
                 ReviewerName = ReviewerName,
                 Rating = Rating,
-                Comment = ReviewText
+                Comment = ReviewText,
+                UserRefId = userId
             };
 
             var resp = await AddReviewAsync(newReview).ConfigureAwait(false);

@@ -14,6 +14,7 @@ namespace GhumGhamNepal.Core.Models.AspNetEntity
         }
 
         public string Id { get; set; } = null!;
+        public int UserId { get; set; }
         public string? UserName { get; set; }
         public string? NormalizedUserName { get; set; }
         public string? Email { get; set; }

@@ -17,8 +17,10 @@
     }
 
         .popup-message.success {
-            background-color: #dff0d8;
-            color: #3c763d;
+            background-color: limegreen;
+            color: white;
+            font-size: initial;
+            padding-right: 50px;
         }
 
         .popup-message.danger {
@@ -32,10 +34,17 @@
         }
 
         .popup-message .close-popup {
+            width: 0px;
             position: absolute;
-            top: 5px;
-            right: 10px;
+            top: -15px;
+            right: 30px;
             cursor: pointer;
+
+            font-size: x-large;
+            color:red;
+            padding: 8px 0px;
+            margin: 12px 0px;
+
         }
 
         .popup-message strong {
@@ -52,7 +61,7 @@
             $('#popupMessage').addClass('show');
             setTimeout(function () {
                 hidePopupMessage();
-            }, 5000); // 5000 milliseconds (5 seconds)
+            }, 10000); // 10000 milliseconds (10 seconds)
         }
 
         // Hide the pop-up message

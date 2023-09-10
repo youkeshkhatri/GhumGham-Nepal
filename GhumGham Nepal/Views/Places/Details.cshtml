@@ -6,8 +6,6 @@
 
 <div class="text-light" style="font-size:small;">
 
-    <partial name="_StatusMessagePartial" model="@TempData["Message"]" />
-
     <div class="container-sm" style="margin-top:120px">
 
 
@@ -229,7 +227,7 @@
                     </div>
                     <div class="form-group">
                         <label for="ReviewText">Review</label>
-                        <textarea class="form-control" id="ReviewText" name="ReviewText" required></textarea>
+                        <textarea class="form-control" id="ReviewText" name="ReviewText" placeholder="Write your review.." style="height:100px" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="Rating">Rating</label>

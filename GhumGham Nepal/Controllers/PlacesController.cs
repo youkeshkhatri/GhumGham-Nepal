@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using GhumGham_Nepal.Repository;
 using GhumGhamNepal.Core.Models.DbEntity;
 using GhumGhamNepal.Core.Services.AttachmentService;
+using Humanizer;
 
 namespace GhumGham_Nepal.Controllers
 {
@@ -70,7 +71,7 @@ namespace GhumGham_Nepal.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<IFormFile> picture = new List<IFormFile>();
+                List<IFormFile> picture = new();
                 if (dto.File != null)
                 {
                     string folder = "/Images/Places/Thumbnail/";
@@ -84,6 +85,7 @@ namespace GhumGham_Nepal.Controllers
 
                 await _placesRepository.AddAsync(dto.ToEntity(attachmentUploadResp.Data)).ConfigureAwait(false);
                 await _placesRepository.CommitAsync().ConfigureAwait(false);
+                TempData["Message"] = $"{dto.PlaceName} has been added successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View(dto);
@@ -117,7 +119,7 @@ namespace GhumGham_Nepal.Controllers
             if (id != dto.Id)
                 return NotFound();
 
-            if (dto.ThumbnailUrl != null)
+            if (dto.ThumbnailUrl != null && dto.File != null)
             {
                 string[] url = dto.ThumbnailUrl.Split('/');
 
@@ -149,6 +151,9 @@ namespace GhumGham_Nepal.Controllers
                 {
                     _placesRepository.Update(dto.ToEntity(attachmentUploadResp.Data));
                     await _placesRepository.CommitAsync().ConfigureAwait(false);
+
+                    TempData["Message"] = $"{dto.PlaceName} has been updated successfully.";
+
                 }
                 catch (Exception)
                 {
@@ -206,6 +211,7 @@ namespace GhumGham_Nepal.Controllers
 
                 _placesRepository.Delete(place);
                 await _placesRepository.CommitAsync();
+                TempData["Message"] = $"{place.PlaceName} has been deleted successfully.";
             }
 
             return RedirectToAction(nameof(Index));

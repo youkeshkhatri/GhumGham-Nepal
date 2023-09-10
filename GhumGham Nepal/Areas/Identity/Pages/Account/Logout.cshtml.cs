@@ -2,23 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using GhumGham_Nepal.Areas.Identity.Data;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using GhumGhamNepal.Core.Models.Identity;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<GhumGham_NepalUser> _signInManager;
+        private readonly SignInManager<GhumGhamNepalUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<GhumGham_NepalUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<GhumGhamNepalUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -28,6 +25,8 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            TempData["Message"] = $"User has been logged out successfully.";
+
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);

@@ -23,6 +23,12 @@ using System.Net;
 using GhumGhamNepal.Core.Services.EmailService;
 using GhumGhamNepal.Core.Enums;
 using GhumGhamNepal.Core.Models.Identity;
+using GhumGham_Nepal.Repository;
+using GhumGhamNepal.Core.Models.DbEntity;
+using GhumGhamNepal.Core.Services.AttachmentService;
+using Humanizer;
+using GhumGham_Nepal.Services;
+using GhumGhamNepal.Core.Services;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
@@ -35,6 +41,9 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ISmtpEmailService _emailService;
+        private readonly ICommonAttachmentService _commonAttachmentService;
+        private readonly IRepository<CommonAttachment> _attachmentRepository;
+        private readonly IHttpContextService _httpContextService;
 
         public RegisterModel(
             UserManager<GhumGhamNepalUser> userManager,
@@ -42,7 +51,10 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             SignInManager<GhumGhamNepalUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ISmtpEmailService emailService)
+            ISmtpEmailService emailService,
+            IRepository<CommonAttachment> attachmentRepository,
+            ICommonAttachmentService commonAttachmentService,
+            IHttpContextService httpContextService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -51,6 +63,9 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _emailService = emailService;
+            _attachmentRepository = attachmentRepository;
+            _commonAttachmentService = commonAttachmentService;
+            _httpContextService = httpContextService;
         }
 
         /// <summary>
@@ -110,6 +125,9 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            public IFormFile UserPhoto { get; set; }
         }
 
 
@@ -125,13 +143,19 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                var errorList = new List<string>();
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
 
-                if (result.Succeeded)
+                // todo::this two should be set in transaction
+                var result = await _userManager.CreateAsync(user, Input.Password);
+                // save profile photo 
+                var uploadPicture = await SaveUserProfilePhotoAsync(Input.UserPhoto, user.Id).ConfigureAwait(false);
+
+
+                if (result.Succeeded && uploadPicture.Status)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
@@ -167,9 +191,20 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
-                foreach (var error in result.Errors)
+
+                if (result.Errors.Any())
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    foreach (var error in result.Errors)
+                    {
+                        errorList.Add(error.Description);
+                    }
+                }
+                if (!uploadPicture.Status)
+                    errorList.Add(uploadPicture.Message.ToString());
+
+                foreach (var error in errorList)
+                {
+                    ModelState.AddModelError(string.Empty, error);
                 }
             }
 
@@ -226,6 +261,46 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<GhumGhamNepalUser>)_userStore;
+        }
+
+        private async Task<ServiceResult> SaveUserProfilePhotoAsync(IFormFile file, string parentRecordId)
+        {
+            try
+            {
+                List<IFormFile> picture = new();
+                if (file != null)
+                {
+                    picture.Add(file);
+                }
+
+                var attachmentUploadResp = _commonAttachmentService.UploadCommonAttachment(picture
+                   .Select(x => new FileUploadRequest(x.ReadBytes(), x.ContentType, x.FileName)).ToList());
+
+                foreach (var item in attachmentUploadResp.Data)
+                {
+                    CommonAttachment attachment = new CommonAttachment();
+                    attachment.ParentTableName = "AspNetUsers";
+                    attachment.ParentRecordID = parentRecordId;
+                    attachment.ServerFileName = item.ServerFileName;
+                    attachment.UserFileName = item.UserFileName;
+                    attachment.FileFormat = item.FileFormat;
+                    attachment.FileType = item.FileType;
+                    attachment.FileLocation = item.FileLocation;
+                    attachment.Size = item.Size;
+                    attachment.CreatedBy = new Guid();
+                    attachment.CreatedOn = DateTime.Now;
+
+                    await _attachmentRepository.AddAsync(attachment).ConfigureAwait(false);
+                    await _attachmentRepository.CommitAsync().ConfigureAwait(false);
+                }
+
+
+                return ServiceResult.Success("");
+            }
+            catch (Exception)
+            {
+                return ServiceResult.Fail("Failed to save profile photo.");
+            }
         }
     }
 }

@@ -11,5 +11,6 @@ namespace GhumGhamNepal.Core.Models.DbEntity
         public string? Role { get; set; }
         public double? Rating { get; set; }
         public string? Comment { get; set; }
+        public int? UserRefId { get; set; }
     }
 }

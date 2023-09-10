@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using GhumGhamNepal.Core.Models.Identity;
+using Humanizer;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
@@ -116,6 +117,9 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    TempData["Message"] = $"Logged In successfully.";
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

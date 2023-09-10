@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GhumGhamNepal.Core.Models.DbEntity
 {
-    [Table("HR_CommonAttachment")]
+    [Table("CommonAttachment")]
     public class CommonAttachment
     {
         [Key]

@@ -18,7 +18,6 @@ namespace GhumGhamNepal.Core.Services
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public HttpContextService(IHttpContextAccessor httpContext, IRepository<AspNetUser> userRepository)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             _httpContextAccessor = httpContext;
             _userRepository = userRepository;
@@ -28,24 +27,30 @@ namespace GhumGhamNepal.Core.Services
         {
             get
             {
-                lock (_lock)
+                try
                 {
-                    if (_curentUser != null)
-                        return _curentUser;
+                    lock (_lock)
+                    {
+                        if (_curentUser != null)
+                            return _curentUser;
 
-                    var currentUserName = _httpContextAccessor.HttpContext?.User?.Identity?.Name;
-                    if (currentUserName == null)
-#pragma warning disable CS8603 // Possible null reference return.
-                        return _curentUser;
-#pragma warning restore CS8603 // Possible null reference return.
+                        var isAuthenticated = _httpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
+                        if (!isAuthenticated)
+                            return new AspNetUser();
 
-#pragma warning disable CS8601 // Possible null reference assignment.
-                    _curentUser = _userRepository.Table.FirstOrDefault(x => x.UserName == currentUserName);
-#pragma warning restore CS8601 // Possible null reference assignment.
+                        var currentUserName = _httpContextAccessor.HttpContext?.User?.Identity?.Name;
+                        if (currentUserName == null)
+                            return new AspNetUser();
+
+                        _curentUser = _userRepository.Table.FirstOrDefault(x => x.UserName == currentUserName);
+                    }
+
+                    return new AspNetUser();
                 }
-#pragma warning disable CS8603 // Possible null reference return.
-                return _curentUser;
-#pragma warning restore CS8603 // Possible null reference return.
+                catch (Exception)
+                {
+                    return new AspNetUser();
+                }
             }
         }
     }
