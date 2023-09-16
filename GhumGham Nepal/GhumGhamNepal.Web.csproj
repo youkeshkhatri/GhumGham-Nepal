@@ -105,6 +105,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GhumGhamNepal.Core\GhumGhamNepal.Core.csproj" />
+    <ProjectReference Include="..\GhumGhamNepal.Services\GhumGhamNepal.Services.csproj" />
   </ItemGroup>
 
 </Project>

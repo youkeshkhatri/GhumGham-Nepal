@@ -1,4 +1,4 @@
-﻿namespace GhumGham_Nepal.Services
+﻿namespace GhumGhamNepal.Core.Services.ServiceResultService
 {
     public interface IServiceResult
     {

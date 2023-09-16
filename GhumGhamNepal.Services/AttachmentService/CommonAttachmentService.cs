@@ -1,15 +1,18 @@
-﻿using GhumGham_Nepal.Models;
-using GhumGham_Nepal.Repository;
+﻿using GhumGham_Nepal.Repository;
 using GhumGham_Nepal.Services.GhumGham_Nepal.Services;
 using Microsoft.Extensions.Options;
+using System.Globalization;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Drawing;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Net.Mail;
+using Microsoft.Extensions.Hosting;
+using GhumGhamNepal.Core.Models.DbEntity;
+using GhumGham_Nepal.Services;
 
-namespace GhumGham_Nepal.Services
+namespace GhumGhamNepal.Core.Services.AttachmentService
 {
     public class CommonAttachmentService : ICommonAttachmentService
     {
@@ -53,12 +56,12 @@ namespace GhumGham_Nepal.Services
             using (Image img = Image.FromFile(filename))
             {
 
-                float widthRatio = (float)img.Width / (float)desiredWidth;
-                float heightRatio = (float)img.Height / (float)desiredHeight;
+                float widthRatio = img.Width / (float)desiredWidth;
+                float heightRatio = img.Height / (float)desiredHeight;
 
                 float ratio = heightRatio > widthRatio ? heightRatio : widthRatio;
-                int newWidth = Convert.ToInt32(Math.Floor((float)img.Width / ratio));
-                int newHeight = Convert.ToInt32(Math.Floor((float)img.Height / ratio));
+                int newWidth = Convert.ToInt32(Math.Floor(img.Width / ratio));
+                int newHeight = Convert.ToInt32(Math.Floor(img.Height / ratio));
 
                 using (Bitmap dstImg = new Bitmap(newWidth, newHeight))
                 {
@@ -117,7 +120,7 @@ namespace GhumGham_Nepal.Services
             //    return "";
             //}
 
-            if (kb > (1024 * maxFileSizeInMb))
+            if (kb > 1024 * maxFileSizeInMb)
             {
                 msg = string.Format("Size cannot be greater than {0} MB", maxFileSizeInMb);
                 return "";
@@ -253,7 +256,7 @@ namespace GhumGham_Nepal.Services
             }
             catch (Exception exp)
             {
-                string msg = string.Format("filename:{0} path:{1} Mesage:{2}", fname, loc, ("Attachement.Failed"));
+                string msg = string.Format("filename:{0} path:{1} Mesage:{2}", fname, loc, "Attachement.Failed");
                 _loggingService.LogError(exp.Message);
 
                 return ServiceResult<List<CommonAttachment>>.Fail(msg);
@@ -290,7 +293,7 @@ namespace GhumGham_Nepal.Services
         {
             string[] sizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
             int mag = (int)Math.Log(bytes, 1024);
-            decimal adjustedSize = (decimal)bytes / (1 << (mag * 10));
+            decimal adjustedSize = (decimal)bytes / (1 << mag * 10);
             return $"{adjustedSize:n1} {sizeSuffixes[mag]}";
         }
 
@@ -468,7 +471,7 @@ namespace GhumGham_Nepal.Services
                 if (_env.IsDevelopment())
                     uploadLocation = Path.Combine(uploadLocation, "Images/Places/Thumbnail/");
                 else
-                    throw new Exception(("File.RootFolderNotFound"));
+                    throw new Exception("File.RootFolderNotFound");
             else if (isCompanyLogo)
                 uploadLocation = Path.Combine(uploadLocation, "LogoBanner/");
             else

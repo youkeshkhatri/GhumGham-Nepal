@@ -1,5 +1,4 @@
 ﻿using GhumGham_Nepal.Services;
-using GhumGham_Nepal.Services.GhumGham_Nepal.Services;
 using GhumGhamNepal.Core.ApplicationDbContext;
 using GhumGhamNepal.Core.Models.DbEntity;
 using GhumGhamNepal.Core.Services;

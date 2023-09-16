@@ -10,12 +10,15 @@
     <Compile Remove="Areas\**" />
     <Compile Remove="Models\Identity\Data\**" />
     <Compile Remove="Models\Identity\Pages\**" />
+    <Compile Remove="Services\**" />
     <EmbeddedResource Remove="Areas\**" />
     <EmbeddedResource Remove="Models\Identity\Data\**" />
     <EmbeddedResource Remove="Models\Identity\Pages\**" />
+    <EmbeddedResource Remove="Services\**" />
     <None Remove="Areas\**" />
     <None Remove="Models\Identity\Data\**" />
     <None Remove="Models\Identity\Pages\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>

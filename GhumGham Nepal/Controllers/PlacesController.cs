@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using GhumGham_Nepal.Repository;
 using GhumGhamNepal.Core.Models.DbEntity;
 using GhumGhamNepal.Core.Services.AttachmentService;
-using Humanizer;
 
 namespace GhumGham_Nepal.Controllers
 {
