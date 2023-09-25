@@ -1,4 +1,10 @@
-﻿<header class="header">
+﻿@using Microsoft.AspNetCore.Identity
+@using GhumGhamNepal.Core.Models.Identity
+
+@inject SignInManager<GhumGhamNepalUser> SignInManager
+@inject UserManager<GhumGhamNepalUser> UserManager
+
+<header class="header">
 
     <a data-aos="zoom-in-left" data-aos-delay="150" asp-controller="Home" asp-action="Index" class="logo">GhumGham Nepal </a>
 
@@ -19,12 +25,12 @@
 
     <div class="dropdown">
         <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="https://aide.self.rigohr.com/\images\male.png" style="max-width: 100%; width: 40px; height: 40px; border-radius: 100%;" />
+            <img src="~/uploads/male.png" style="max-width: 100%; width: 40px; height: 40px; border-radius: 100%;" />
             Profile
         </button>
         <div class="dropdown-menu py-4" aria-labelledby="dropdownMenuButton" style="align-content:center; text-align:center; width:auto; height:auto;">
             <div class="dropdown-item">
-                <img src="https://aide.self.rigohr.com/\images\male.png" style="margin-left:8px; width: 80px; height: 80px; border-radius: 100%;" />
+                <img src="~/uploads/male.png" style="margin-left:8px; width: 80px; height: 80px; border-radius: 100%;" />
             </div>
             <div class="dropdown-item">
                 <partial name="_LoginPartial" />
