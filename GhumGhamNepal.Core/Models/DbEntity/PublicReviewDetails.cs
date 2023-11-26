@@ -6,11 +6,11 @@ namespace GhumGhamNepal.Core.Models.DbEntity
     {
         public int Id { get; set; }
         public int PlaceId { get; set; }
-        public string? ReviewerName { get; set; }
+        public string ReviewerName { get; set; }
         [NotMapped]
-        public string? Role { get; set; }
+        public string Role { get; set; }
         public double? Rating { get; set; }
-        public string? Comment { get; set; }
+        public string Comment { get; set; }
         public int? UserRefId { get; set; }
     }
 }

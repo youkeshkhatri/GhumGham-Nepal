@@ -59,7 +59,7 @@ namespace GhumGham_Nepal.Repository
                 await _dbContext.SaveChangesAsync(isSoftDelete).ConfigureAwait(false);
             }
             catch (Exception ex)
-            { throw ex; }
+            { throw; }
         }
         /// <summary>
         /// Disposes the current object

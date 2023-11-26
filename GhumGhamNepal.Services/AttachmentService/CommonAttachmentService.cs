@@ -139,7 +139,7 @@ namespace GhumGhamNepal.Core.Services.AttachmentService
         /// </summary>
         /// <param name="files">Multiple attachment collection list</param>
         /// <param name="subFolder">Any specific sub-folder name inside upload folder</param>
-        public ServiceResult<List<CommonAttachment>> UploadCommonAttachment(List<FileUploadRequest> files, string? subFolder = null, bool isCompanyLogo = false)
+        public ServiceResult<List<CommonAttachment>> UploadCommonAttachment(List<FileUploadRequest> files, string subFolder = null, bool isCompanyLogo = false)
         {
             var fname = "";
             string loc = "";
@@ -458,7 +458,7 @@ namespace GhumGhamNepal.Core.Services.AttachmentService
 
         }
 
-        public string GetUploadLocation(bool isCompanyLogo, string? subFolder = null, bool isUploading = true)
+        public string GetUploadLocation(bool isCompanyLogo, string subFolder = null, bool isUploading = true)
         {
             string uploadLocation = string.IsNullOrEmpty(_appSettings.FileBasePath) ? _env.WebRootPath : _appSettings.FileBasePath;
 
@@ -487,9 +487,9 @@ namespace GhumGhamNepal.Core.Services.AttachmentService
 
         public class AppSettings
         {
-            public string? FileBasePath { get; set; }
-            public string? FileRootFolderName { get; set; }
-            public string? FileBaseUrlPrefix
+            public string FileBasePath { get; set; }
+            public string FileRootFolderName { get; set; }
+            public string FileBaseUrlPrefix
             {
                 get
                 {

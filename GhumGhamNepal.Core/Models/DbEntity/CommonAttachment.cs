@@ -11,34 +11,34 @@ namespace GhumGhamNepal.Core.Models.DbEntity
 
         [Required]
         [StringLength(150)]
-        public string? ParentTableName { get; set; }
+        public string ParentTableName { get; set; }
 
         [Required]
         [StringLength(150)]
-        public string? ParentRecordID { get; set; }
+        public string ParentRecordID { get; set; }
 
         [Required]
         [StringLength(150)]
-        public string? ServerFileName { get; set; }
+        public string ServerFileName { get; set; }
 
         [StringLength(150)]
-        public string? ServerThumbnailFileName { get; set; }
+        public string ServerThumbnailFileName { get; set; }
 
         [Required]
         [StringLength(150)]
-        public string? UserFileName { get; set; }
+        public string UserFileName { get; set; }
 
         [StringLength(50)]
-        public string? FileFormat { get; set; }
+        public string FileFormat { get; set; }
 
         [StringLength(150)]
-        public string? FileType { get; set; }
+        public string FileType { get; set; }
 
         [StringLength(150)]
-        public string? FileLocation { get; set; }
+        public string FileLocation { get; set; }
 
         [StringLength(50)]
-        public string? Size { get; set; }
+        public string Size { get; set; }
 
         public Guid? CreatedBy { get; set; }
 

@@ -13,13 +13,13 @@ namespace GhumGhamNepal.Core.Models.DbEntity
     {
         [Key]
         public int Id { get; set; }
-        public string? FromEmail { get; set; }
-        public string? HostName { get; set; }
-        public string? UserName { get; set; }
-        public string? Password { get; set; }
+        public string FromEmail { get; set; }
+        public string HostName { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
         public int Port { get; set; }
         public bool EnableSsl { get; set; }
         public bool? IsAmazonEmailService { get; set; }
-        public string? ReplyToEmail { get; set; }
+        public string ReplyToEmail { get; set; }
     }
 }
