@@ -100,7 +100,12 @@ namespace GhumGhamNepal.Core.Services.EmailService
             }
         }
 
-        public string? GetEmailTemplateContent(string templateFileName)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            await SendAsync(subject, email, htmlMessage);
+        }
+
+        public string GetEmailTemplateContent(string templateFileName)
         {
             string templatePath = Path.Combine(_webHostEnvironment.WebRootPath, "EmailTemplates", templateFileName);
 

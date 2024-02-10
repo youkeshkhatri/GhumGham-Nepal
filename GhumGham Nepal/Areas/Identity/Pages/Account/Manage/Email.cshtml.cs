@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using GhumGhamNepal.Core.Models.Identity;
+using GhumGhamNepal.Core.Services.EmailService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
 {
@@ -20,12 +19,12 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<GhumGhamNepalUser> _userManager;
         private readonly SignInManager<GhumGhamNepalUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly ISmtpEmailService _emailSender;
 
         public EmailModel(
             UserManager<GhumGhamNepalUser> userManager,
             SignInManager<GhumGhamNepalUser> signInManager,
-            IEmailSender emailSender)
+            ISmtpEmailService emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -39,7 +39,6 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
         private readonly IUserStore<GhumGhamNepalUser> _userStore;
         private readonly IUserEmailStore<GhumGhamNepalUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
         private readonly ISmtpEmailService _emailService;
         private readonly ICommonAttachmentService _commonAttachmentService;
         private readonly IRepository<CommonAttachment> _attachmentRepository;
@@ -50,7 +49,6 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             IUserStore<GhumGhamNepalUser> userStore,
             SignInManager<GhumGhamNepalUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
             ISmtpEmailService emailService,
             IRepository<CommonAttachment> attachmentRepository,
             ICommonAttachmentService commonAttachmentService,
@@ -61,7 +59,6 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
             _emailService = emailService;
             _attachmentRepository = attachmentRepository;
             _commonAttachmentService = commonAttachmentService;

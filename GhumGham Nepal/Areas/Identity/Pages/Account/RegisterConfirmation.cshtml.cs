@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using GhumGhamNepal.Core.Models.Identity;
+using GhumGhamNepal.Core.Services.EmailService;
 
 namespace GhumGham_Nepal.Areas.Identity.Pages.Account
 {
@@ -19,9 +20,9 @@ namespace GhumGham_Nepal.Areas.Identity.Pages.Account
     public class RegisterConfirmationModel : PageModel
     {
         private readonly UserManager<GhumGhamNepalUser> _userManager;
-        private readonly IEmailSender _sender;
+        private readonly ISmtpEmailService _sender;
 
-        public RegisterConfirmationModel(UserManager<GhumGhamNepalUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<GhumGhamNepalUser> userManager, ISmtpEmailService sender)
         {
             _userManager = userManager;
             _sender = sender;

@@ -11,6 +11,8 @@ namespace GhumGhamNepal.Core.Services.EmailService
     {
         Task<ServiceResult> SendAsync(string subject, string receiverAddress, string htmlBody, string bcc = "", string textBody = "", string cc = "");
 
+        Task SendEmailAsync(string email, string subject, string htmlMessage);
+
         string GetEmailTemplateContent(string templateFileName);
     }
 }
