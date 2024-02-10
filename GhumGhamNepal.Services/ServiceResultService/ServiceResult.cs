@@ -10,6 +10,11 @@ namespace GhumGham_Nepal.Services
 
         public bool Status { get; set; }
 
+        public ServiceResult()
+        {
+            
+        }
+
         public ServiceResult(bool status, List<string> message = null, string messageType = null)
         {
             if (string.IsNullOrEmpty(messageType))

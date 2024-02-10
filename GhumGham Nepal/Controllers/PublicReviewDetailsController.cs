@@ -3,6 +3,7 @@ using GhumGhamNepal.Core.ApplicationDbContext;
 using GhumGhamNepal.Core.Models.DbEntity;
 using GhumGhamNepal.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GhumGham_Nepal.Controllers
 {
@@ -43,7 +44,7 @@ namespace GhumGham_Nepal.Controllers
             };
 
             var resp = await AddReviewAsync(newReview).ConfigureAwait(false);
-            TempData["Message"] = resp.Message.FirstOrDefault();
+            TempData["Message"] = JsonConvert.SerializeObject(resp);
 
             // Redirect back to the details page
             return RedirectToAction("Details", "Places", new { id = PlaceId });

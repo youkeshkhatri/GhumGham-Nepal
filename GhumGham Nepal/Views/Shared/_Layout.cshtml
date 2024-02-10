@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using GhumGham_Nepal.Services
+@using Newtonsoft.Json
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,18 +17,30 @@
     <!-- Navbar -->
     <partial name="_headerPartial" />
     <!-- Navbar -->
-
+    <!-- PopUp Message -->
+    @{
+        var result = TempData["Message"] as string;
+        var statusResp = new ServiceResult(false);
+        try
+        {
+            if (result != null)
+                statusResp = JsonConvert.DeserializeObject<ServiceResult>(result);
+            else
+                statusResp = null;
+        }
+        catch (Exception)
+        {
+            statusResp.Message = new List<string> { result };
+        }
+    }
+    <partial name="_StatusMessagePartial" model="statusResp" />
+    <!-- PopUp Message -->
     <!-- Body -->
-
-    <partial name="_StatusMessagePartial" model="@TempData["Message"]" />
-
     @RenderBody()
     <!-- Body -->
-
     <!-- Footer -->
     <partial name="_footerPartial" />
     <!-- Footer -->
-
     <!-- scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

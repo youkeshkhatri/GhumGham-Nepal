@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model GhumGham_Nepal.Services.ServiceResult
 
 <style>
     /* Add these styles to your CSS file */
@@ -14,18 +14,32 @@
         opacity: 0; /* Initially hidden */
         transform: translateX(100%);
         z-index: 9999; /* Set a high z-index to ensure visibility */
+        font-size: initial;
+        padding-right: 50px;
     }
 
         .popup-message.success {
-            background-color: limegreen;
-            color: white;
-            font-size: initial;
-            padding-right: 50px;
+            /* background-color: limegreen;
+            color: white; */
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
         }
 
         .popup-message.danger {
-            background-color: #f2dede;
-            color: #a94442;
+            /* background-color: #f2dede;
+            color: #a94442; */
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .popup-message.warning {
+            /* background-color: #f2dede;
+            color: #a94442; */
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
         }
 
         .popup-message.show {
@@ -80,12 +94,12 @@
 </script>
 
 
-@if (!String.IsNullOrEmpty(Model))
+@if (Model != null && !String.IsNullOrEmpty(Model.Message.FirstOrDefault()))
 {
-    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
+    var statusMessageClass = Model.MessageType.ToLower();
 
     <div id="popupMessage" class="popup-message @statusMessageClass">
         <button type="button" class="close-popup">×</button>
-        @Model
+        @Model.Message.FirstOrDefault()
     </div>
 }
